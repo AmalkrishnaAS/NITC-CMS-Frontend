@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import Accordion from '../components/Accordion'
@@ -11,7 +11,7 @@ import Select from 'react-select'
 import { HiOutlineFilter } from 'react-icons/hi'
 
 
-const Home: NextPage = () => {
+const Home = () => {
   const [AllData, setAllData] = useState([
     {
       title:'Broken water pipe',
