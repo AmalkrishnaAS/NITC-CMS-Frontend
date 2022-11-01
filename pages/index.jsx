@@ -77,7 +77,7 @@ const Home = () => {
       value:'Closed'
     }
   ]
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [filter, setFilter] = useState({
     status: 'all',
     type: 'all',
