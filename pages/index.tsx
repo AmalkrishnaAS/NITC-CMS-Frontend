@@ -1,85 +1,188 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Accordion from '../components/Accordion'
+import {useState} from 'react'
+import {
+  Button,
+
+} from 'flowbite-react'
+import Select from 'react-select'
+import { HiOutlineFilter } from 'react-icons/hi'
+
 
 const Home: NextPage = () => {
+  const [AllData, setAllData] = useState([
+    {
+      title:'Broken water pipe',
+      description:'The water pipe in the kitchen is broken and needs to be replaced',
+      status:'Open',
+      date:'2021-05-12',
+      id:1,
+      type:'Maintainance'
+  },
+  {
+      title:'improperly installed door',
+      description:'The door in the kitchen is not properly installed and needs to be fixed',
+      status:'Closed',
+      date:'2021-05-13',
+      id:2,
+      type:'Maintainance'
+  },
+  {
+      title:'Hectic noise',
+      description:'There is a hectic noise coming from the kitchen',
+      status:'Open',
+      date:'2021-05-12',
+      id:3,
+      type:'Other'
+ 
+     }
+      
+  ])
+
+  const options1=[
+    {
+      label:'None',
+      value:'all'
+    },
+    {
+      label:'Maintainance',
+      value:'Maintainance'
+    },
+    {
+      label:'Academic',
+      value:'Academic'
+    },
+    {
+      label:'Hostels',
+      value:'Hostels'
+    },
+    {
+      label:'Other',
+      value:'Other'
+    }
+  ]
+  const options2=[
+    {
+      label:'None',
+      value:'all'
+    },
+    {
+      label:'Open',
+      value:'Open'
+    },
+    {
+      label:'Closed',
+      value:'Closed'
+    }
+  ]
+  const [open, setOpen] = useState(true)
+  const [filter, setFilter] = useState({
+    status: 'all',
+    type: 'all',
+  })
+ //filter data based on filter object
+ const ApplyFilter=()=>{
+  let tempData=AllData
+  if(filter.status!=='all'){
+    tempData=tempData.filter((item)=>item.status===filter.status)
+  }
+  if(filter.type!=='all'){
+    tempData=tempData.filter((item)=>item.type===filter.type)
+  }
+  return tempData
+
+  
+  
+ }
+  const onSelect=(value,action)=>{
+  setFilter({
+    ...filter,
+    [action.name]:value.value
+  })
+  console.log(filter)
+  setData(ApplyFilter())
+
+    //log the name attribute of the select element
+   
+  
+
+  }
+  const [data, setData] = useState([
+    {
+     title:'Broken water pipe',
+     description:'The water pipe in the kitchen is broken and needs to be replaced',
+     status:'Open',
+     date:'2021-05-12',
+     id:1,
+     type:'Maintainance'
+ },
+ {
+     title:'improperly installed door',
+     description:'The door in the kitchen is not properly installed and needs to be fixed',
+     status:'Closed',
+     date:'2021-05-13',
+     id:2,
+     type:'Maintainance'
+ },
+ {
+     title:'Hectic noise',
+     description:'There is a hectic noise coming from the kitchen',
+     status:'Open',
+     date:'2021-05-12',
+     id:3,
+     type:'Other'
+
+    }
+ ])
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    
+  
+<div className="p-4">
+ <header className=' flex justify-between mx-auto sm:mx-6'>
+    <h1 className="text-4xl font-semibold text-center text-gray-700 mb-6 text-3xl flex justify-center items-center ">Complaints <span className='bg-blue-700 text-white text-sm block w-8 h-8 flex justify-center items-center  rounded-full mt-1 ml-3'>
+    {ApplyFilter().length} </span></h1>
+    <div>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
     </div>
+    <div>
+      <Button
+      onClick={()=>setOpen(!open)}
+      >
+        <HiOutlineFilter className='text-xl sm:mr-2  '/>
+        <span className='hidden sm:block'>
+        {
+          open?'Close':'Filter' 
+        }
+        </span>
+       
+        
+      </Button>
+      
+   {open&& <div className='flex flex-col sm:w-64  shadow-md rounded-md absolute right-16 z-10 bg-white border-2 p-2 space-y-3'>
+    <Select
+    name='type'
+    
+    placeholder='Filter by Type...' options={options1} onChange={
+      onSelect
+    }>
+
+    </Select>
+    <Select placeholder='Filter by Status...' 
+    name='status' 
+    onChange={onSelect}
+    
+    options={options2}>
+      </Select>
+
+    
+      
+    </div>}
+    </div>
+ </header>
+<Accordion data={ApplyFilter()}></Accordion>
+</div>
   )
 }
 
