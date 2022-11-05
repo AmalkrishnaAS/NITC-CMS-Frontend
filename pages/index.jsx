@@ -11,7 +11,7 @@ import Select from 'react-select'
 import { HiOutlineFilter } from 'react-icons/hi'
 
 
-const Home = () => {
+const Home = ({}) => {
   const [AllData, setAllData] = useState([
     {
       title:'Broken water pipe',
@@ -136,6 +136,14 @@ const Home = () => {
 
     }
  ])
+
+ const ClearFilters=()=>{
+    setFilter({
+      status:'all',
+      type:'all'
+    })
+    setData(AllData)
+ }
   return (
     
   
@@ -164,12 +172,17 @@ const Home = () => {
     <Select
     name='type'
     
-    placeholder='Filter by Type...' options={options1} onChange={
+    placeholder={filter.type==='all'?'Filter by type':filter.type}
+    
+    options={options1} onChange={
       onSelect
-    }>
+    }
+    value={filter.type}
+    >
 
     </Select>
-    <Select placeholder='Filter by Status...' 
+    <Select placeholder={filter.status==='all'?'Filter by Status...':filter.status} 
+    value={filter.status}
     name='status' 
     onChange={onSelect}
     
@@ -177,7 +190,9 @@ const Home = () => {
       </Select>
 
     
-      
+      <div>
+        <Button onClick={ClearFilters} >Clear </Button>
+      </div>
     </div>}
     </div>
  </header>

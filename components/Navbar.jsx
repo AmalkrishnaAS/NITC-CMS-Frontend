@@ -3,7 +3,8 @@ import randomAvatar from 'random-avatar'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-const Navbar = () => {
+import { Button } from 'flowbite-react'
+const Navbar = ({user,login,logout}) => {
     const router = useRouter()
     const routes= [
         {
@@ -32,12 +33,12 @@ const Navbar = () => {
            
             {
                 name: 'Logout',
-                path: ()=>{
-                    localStorage.removeItem('token')
+                path: null,
+                function: () => {
+                    setIsUserOpened(false)
                     router.push('/')
 
-                },
-                function: () => router.push('/')
+                    logout()}
             }
         ]
 
@@ -61,17 +62,24 @@ const Navbar = () => {
       <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">NITC-CMS</span>
   </a>
   <div class="flex items-center md:order-2">
-      <button onClick={toggleUserMenu}
+      {user?<button onClick={toggleUserMenu}
       type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="user photo" />
+        <img class="w-8 h-8 rounded-full" src={
+            user?.avatar
+        } alt="user photo" />
       </button>
+    :<Button onClick={login} className='bg-700'>Login</Button>
+      }
       
       <div class={` ${
         isUserOpened ? 'block' : 'hidden'
       } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-6 right-24`}>
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>
-          <span class="block text-sm text-gray-900 dark:text-white">Regular User</span>
+          <span class="block text-sm text-gray-900 dark:text-white">{
+            //get name from email with first letter capital
+            user?.email.split('@')[0].charAt(0).toUpperCase() + user?.email.split('@')[0].slice(1)
+          }</span>
           <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
         </div>
         <ul class="py-1" aria-labelledby="user-menu-button">
@@ -98,6 +106,8 @@ const Navbar = () => {
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
     </button>
   </div>
+  
+  
   <div class={`
   ${isOpened ? 'block' : 'hidden'}
   justify-between items-center w-full md:flex md:w-auto md:order-1`} id="mobile-menu-2">
@@ -115,8 +125,11 @@ const Navbar = () => {
             })
         }
     </ul>
+   
   </div>
+  
   </div>
+  
 </nav>
 </div>
 

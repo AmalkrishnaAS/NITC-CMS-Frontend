@@ -6,6 +6,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@dicebear/avatars": "^4.10.5",
+    "@dicebear/avatars-avataaars-sprites": "^4.10.5",
+    "@dicebear/avatars-bottts-sprites": "^4.10.5",
+    "@dicebear/open-peeps": "^4.10.5",
     "@material-tailwind/react": "^1.2.4",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.3.2",
