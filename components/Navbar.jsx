@@ -54,10 +54,10 @@ const Navbar = ({user,login,logout}) => {
         setIsUserOpened(!isUserOpened)
     }
   return (
-    <div className='h-100 w-screen  '>
-    <nav class="bg-white  border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 shadow-md w-full  ">
+    <div className=' w-screen  '>
+    <nav class="bg-white   border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 shadow-md w-full  ">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
-  <a href="https://flowbite.com/" class="flex items-center">
+  <a href="https://www.nitc.ac.in" class="flex items-center">
       <img src="https://upload.wikimedia.org/wikipedia/en/d/d0/National_Institute_of_Technology%2C_Calicut_Logo.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
       <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">NITC-CMS</span>
   </a>
@@ -74,7 +74,7 @@ const Navbar = ({user,login,logout}) => {
       
       <div class={` ${
         isUserOpened ? 'block' : 'hidden'
-      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 right-20
+      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 right-24
       
       `}>
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>

@@ -2,14 +2,17 @@ import '../styles/globals.css'
 
 import Head from 'next/head'
 import Navbar from '../components/Navbar'
-import {useState } from 'react'
+import {useState,useEffect } from 'react'
 import {
   createAvatar
 } from '@dicebear/avatars'
 import  * as style from '@dicebear/avatars-bottts-sprites';
+import {useRouter} from 'next/router'
 
  
 function MyApp({ Component, pageProps }) {
+
+  const router = useRouter()
   
 
   const [user, setUser] = useState(null)
@@ -18,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       email: 'john@nitc.ac.in',
       admin: true,
       avatar:null,
-      rollno: 'b200729CS',
+      rollno: 'B200729CS',
       department: 'CSE',
       joined: '2021-05-12',  //return as date stiring from backend
 
