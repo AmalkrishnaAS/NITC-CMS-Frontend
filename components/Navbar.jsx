@@ -74,7 +74,7 @@ const Navbar = ({user,login,logout}) => {
       
       <div class={` ${
         isUserOpened ? 'block' : 'hidden'
-      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-8 right-20
+      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 right-20
       
       `}>
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>
