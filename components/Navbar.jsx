@@ -54,7 +54,7 @@ const Navbar = ({user,login,logout}) => {
         setIsUserOpened(!isUserOpened)
     }
   return (
-    <div className=' w-screen  '>
+    <div className=' '>
     <nav class="bg-white   border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 shadow-md w-full  ">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
   <a href="https://www.nitc.ac.in" class="flex items-center">
