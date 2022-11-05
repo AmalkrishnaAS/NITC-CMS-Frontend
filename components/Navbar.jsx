@@ -63,9 +63,9 @@ const Navbar = ({user,login,logout}) => {
   </a>
   <div class="flex items-center md:order-2">
       {user?<button onClick={toggleUserMenu}
-      type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+      type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-4 " id="user-menu-button md:mr-6" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src={
+        <img class="w-8 h-8 rounded-full " src={
             user?.avatar
         } alt="user photo" />
       </button>
@@ -74,7 +74,7 @@ const Navbar = ({user,login,logout}) => {
       
       <div class={` ${
         isUserOpened ? 'block' : 'hidden'
-      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 right-24
+      } z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 md:top-[42px] right-24
       
       `}>
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>
