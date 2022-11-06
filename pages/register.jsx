@@ -10,8 +10,9 @@ import {
 
 const register = () => {
   return (
-    <div className="  flex flex-col items-center justify-center min-h-screen  py-2 -mt-6  sm:px-6 lg:px-8">
-    <form className="flex flex-col gap-4">
+    <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8">
+      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Create an Account</h3>
+    <form className="flex flex-col gap-4 ">
     <div>
       <div className="mb-2 block">
         <Label
@@ -95,7 +96,7 @@ const register = () => {
         </Link>
      
     </div>
-    <Button type="submit">
+    <Button type="submit" className='md:w-[30vw] mx-auto'>
       Register new account
     </Button>
   </form>

@@ -25,6 +25,7 @@ const create = ({user}) => {
   ]
   return (
     <div className="p-6 max-w-[900px] mx-auto">
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Raise a Complaint</h1>
         
     <form>
     <div class="relative z-0 mb-6 w-full group">
