@@ -4,7 +4,7 @@ import {HiMail} from 'react-icons/hi'
 import Link from 'next/link'
 const login = () => {
   return (
-    <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover md:h-[86.2vh] sm:h-[90.3vh] h-[90.3vh] overflow-y-hidden">
+    <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover h-screen">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
       
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
