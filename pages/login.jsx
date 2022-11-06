@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
 import {HiMail} from 'react-icons/hi'
+import Link from 'next/link'
 const login = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-28 sm:px-6 lg:px-8">
@@ -39,7 +40,15 @@ const login = () => {
     <Label htmlFor="remember">
       Remember me
     </Label>
+   
+   
   </div>
+  <Link href={'/register'} legacyBehavior>
+      <a className="text-sm text-blue-600 hover:underline font-semibold block">
+        Don't have an account? Register
+      </a>
+    
+    </Link>
   <Button type="submit">
     Submit
   </Button>

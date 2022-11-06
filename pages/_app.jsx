@@ -23,7 +23,8 @@ function MyApp({ Component, pageProps }) {
       avatar:null,
       rollno: 'B200729CS',
       department: 'CSE',
-      joined: '2021-05-12',  //return as date stiring from backend
+      joined: '2021-05-12',//return as date stiring from backend
+      name:'John Doe'
 
     })
     setUser((prev) => {

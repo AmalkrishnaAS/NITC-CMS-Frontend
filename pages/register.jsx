@@ -6,10 +6,11 @@ import {
     TextInput,
     } from 'flowbite-react'
     import {HiMail} from 'react-icons/hi'
+    import Link from 'next/link'
 
 const register = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-6  sm:px-6 lg:px-8">
+    <div className="  flex flex-col items-center justify-center min-h-screen  py-2 -mt-6  sm:px-6 lg:px-8">
     <form className="flex flex-col gap-4">
     <div>
       <div className="mb-2 block">
@@ -29,13 +30,13 @@ const register = () => {
       <div className="mb-2 block">
         <Label
           htmlFor="email2"
-          value="Your email"
+          value="Roll no"
         />
       </div>
       <TextInput
-        id="email2"
-        type="email"
-        placeholder="name@flowbite.com"
+        id="rno"
+        type="text"
+        placeholder="Eg: B200729CS"
         required={true}
         shadow={true}
         
@@ -43,13 +44,13 @@ const register = () => {
       <div className="mb-2 block">
         <Label
           htmlFor="email2"
-          value="Your email"
+          value="Department"
         />
       </div>
       <TextInput
         id="email2"
-        type="email"
-        placeholder="name@flowbite.com"
+        type="text"
+        placeholder="Eg : CSE"
         required={true}
         shadow={true}
         
@@ -84,16 +85,15 @@ const register = () => {
       />
     </div>
     <div className="flex items-center gap-2">
-      <Checkbox id="agree" />
-      <Label htmlFor="agree">
-        I agree with the{' '}
-        <a
-          href="/forms"
-          className="text-blue-600 hover:underline dark:text-blue-500"
-        >
-          terms and conditions
+     
+        <Link legacyBehavior href={'/login'}>
+        <a className="text-blue-600 hover:underline dark:text-blue-500">
+          Already have an account?
         </a>
-      </Label>
+
+        
+        </Link>
+     
     </div>
     <Button type="submit">
       Register new account
