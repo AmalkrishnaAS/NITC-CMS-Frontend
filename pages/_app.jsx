@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
 
 
   return ( 
-    <>
+    <div className='overflow-hidden'>
    
 <Navbar
 user={user}
@@ -56,10 +56,12 @@ setUser={setUser}
 />
 
 
-   
-  <Component user={user} {...pageProps} />
+   <div className='overflow-hidden'>
+      <Component {...pageProps} user={user} setUser={setUser} />
+   </div>
+  
   {/* <FooterComp/> */}
-  </>
+  </div>
 
   )  
 }
