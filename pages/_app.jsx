@@ -10,6 +10,15 @@ import  * as style from '@dicebear/avatars-bottts-sprites';
 import {useRouter} from 'next/router'
 import  FooterComp  from '../components/Footer'
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    if(router.pathname==='/login') {
+      document.body.classList.add('overflow-hidden')
+      
+    }
+  
+   
+    },[])
+  
 
   const router = useRouter()
   
