@@ -2,7 +2,13 @@ import React from 'react'
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react'
 import {HiMail} from 'react-icons/hi'
 import Link from 'next/link'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 const login = () => {
+    const router = useRouter()
+    useEffect(() => {
+        document.body.classList.add('overflow-hidden')
+    }, [])
   return (
     <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover md:h-[92vh] sm:h-[92vh] h-[92vh] overflow-y-hidden  overflow-hidden">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
