@@ -8,8 +8,7 @@ import {
 } from '@dicebear/avatars'
 import  * as style from '@dicebear/avatars-bottts-sprites';
 import {useRouter} from 'next/router'
-
- 
+import  FooterComp  from '../components/Footer'
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter()
@@ -59,6 +58,7 @@ setUser={setUser}
 
    
   <Component user={user} {...pageProps} />
+  {/* <FooterComp/> */}
   </>
 
   )  
