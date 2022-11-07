@@ -21,6 +21,11 @@ const Navbar = ({user,login,logout}) => {
             name:'Raise a Complaint',
             path:'/create',
             function: () => router.push('/create')
+        },
+        {
+            name:'Profile',
+            path:'/profile',
+            function: () => router.push('/profile')
         }
         ]
 
