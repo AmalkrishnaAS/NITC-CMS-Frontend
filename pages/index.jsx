@@ -147,7 +147,7 @@ const Home = ({}) => {
   return (
     
   
-<div className="p-4 overflow-auto ">
+<div className="p-4 overflow-auto">
  <header className=' flex justify-between mx-auto sm:mx-6'>
     <h1 className="text-4xl font-semibold text-center text-gray-700 mb-6 text-3xl flex justify-center items-center ">Complaints <span className='bg-blue-700 text-white text-sm block w-8 h-8 flex justify-center items-center  rounded-full mt-1 ml-3'>
     {ApplyFilter().length} </span></h1>

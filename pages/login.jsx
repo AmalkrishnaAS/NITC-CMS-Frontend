@@ -8,6 +8,13 @@ const login = () => {
     const router = useRouter()
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
+        //when component unmounts
+        return () => {
+            document.body.classList.remove('overflow-hidden')
+        }
+
+        
+
     }, [])
   return (
     <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover md:h-[92vh] sm:h-[92vh] h-[92vh] overflow-y-hidden  overflow-hidden">
