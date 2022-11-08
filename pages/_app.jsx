@@ -20,12 +20,13 @@ function MyApp({ Component, pageProps }) {
   const login=()=>{
     setUser ({
       email: 'john@nitc.ac.in',
-      admin: true,
+      role:'student',
       avatar:null,
-      rollno: 'B200729CS',
+      rollno: 'B200739CS',
       department: 'CSE',
       joined: '2021-05-12',//return as date stiring from backend
-      name:'John Doe'
+      name:'John Doe',
+      fa:'Saleena N'
 
     })
     setUser((prev) => {
@@ -46,8 +47,8 @@ function MyApp({ Component, pageProps }) {
 
 
   return ( 
-    <div className='overflow-hidden'>
    
+   <>
 <Navbar
 user={user}
 login={login}
@@ -58,13 +59,13 @@ setUser={setUser}
 />
 
 
-   <div className='overflow-hidden'>
+   <div className=' '>
       <Component {...pageProps} user={user} setUser={setUser} />
-   </div>
+  
   
   {/* <FooterComp/> */}
   </div>
-
+  </>
   )  
 }
 
