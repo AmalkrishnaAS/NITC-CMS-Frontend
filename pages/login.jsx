@@ -17,7 +17,7 @@ const login = () => {
 
     // }, [])
   return (
-    <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover  p-5 overflow-auto scroll-hide h-[90.5vh]" >
+    <section class="  md:py-6 bg-[url('/nitcjpg.jpg')]  bg-cover  p-5 overflow-auto scroll-hide h-[90.1vh]" >
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0 ">
       
         <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
