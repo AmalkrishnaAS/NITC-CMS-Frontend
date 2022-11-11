@@ -5,7 +5,7 @@ import {
     HiOutlineArrowCircleDown,HiCheck
 } from  'react-icons/hi'
 import {
-    HiBookOpen
+    HiBookOpen,HiInformationCircle
 }
 from 'react-icons/hi'
 //import delete and edit icons
@@ -14,7 +14,7 @@ import { HiOutlineTrash, HiOutlinePencilAlt,HiClock } from 'react-icons/hi'
 
 
 
-const AccordionComp = ({data}) => {
+const AccordionComp = ({data,setDeleteModal}) => {
     
   
    
@@ -81,10 +81,18 @@ const AccordionComp = ({data}) => {
         </div>
         <div className='flex space-x-4 p-2'>
         <div className=''>
-        <HiOutlineTrash className='text-2xl text-red-500 cursor-pointer' />
+        <HiOutlineTrash className='text-2xl text-red-500 cursor-pointer' onClick={
+            ()=>{
+                setDeleteModal(true)
+            }
+
+        } />
         </div>
         <div className='flex'>
         <HiOutlinePencilAlt  className='text-2xl text-blue-500 cursor-pointer' />
+        </div>
+        <div className='flex'>
+        <HiInformationCircle  className='text-2xl text-yellow-300  cursor-pointer ' />
         </div>
         </div>
       </Accordion.Content>

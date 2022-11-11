@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Accordion from '../components/Accordion'
 import {useState} from 'react'
+import DeleteModal from '../components/DeleteModal'
 import {
   Button,
 
@@ -12,6 +13,7 @@ import { HiOutlineFilter } from 'react-icons/hi'
 
 
 const Home = ({}) => {
+  const [deleteModal, setDeleteModal] = useState(false)
   const [AllData, setAllData] = useState([
     {
       title:'Broken water pipe',
@@ -148,6 +150,10 @@ const Home = ({}) => {
     
   
 <div className="p-4 overflow-auto">
+  <DeleteModal
+  deleteModal={deleteModal}
+  setDeleteModal={setDeleteModal}
+  ></DeleteModal>
  <header className=' flex justify-between mx-auto sm:mx-6'>
     <h1 className="text-4xl font-semibold text-center text-gray-700 mb-6 text-3xl flex justify-center items-center ">Complaints <span className='bg-blue-700 text-white text-sm block w-8 h-8 flex justify-center items-center  rounded-full mt-1 ml-3'>
     {ApplyFilter().length} </span></h1>
@@ -196,7 +202,9 @@ const Home = ({}) => {
     </div>}
     </div>
  </header>
-<Accordion data={ApplyFilter()}></Accordion>
+<Accordion data={ApplyFilter()}
+setDeleteModal={setDeleteModal}
+></Accordion>
 </div>
   )
 }
