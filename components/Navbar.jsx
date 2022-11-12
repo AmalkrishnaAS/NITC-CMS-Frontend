@@ -89,7 +89,7 @@ const Navbar = ({user,login,logout}) => {
                 userRoutes.map((route, index) => {
                     return(
                         <li key={index}>
-                            <span  onClick={route.function} class=" cursor-pointer flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+                           <span  onClick={route.function} class=" cursor-pointer flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">
                                 <span class="ml-2 text-sm text-gray-700 dark:text-gray-200">{route.name}</span>
                             </span>
                         </li>

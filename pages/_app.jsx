@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
   const login = () => {
     setUser({
       email: "john@nitc.ac.in",
-      role: "student",
+      role: "admin",
       avatar: null,
       rollno:"B200729CS",
       department: "CSE",

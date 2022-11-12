@@ -14,7 +14,7 @@ import { HiOutlineTrash, HiOutlinePencilAlt,HiClock } from 'react-icons/hi'
 
 
 
-const AccordionComp = ({data,setDeleteModal}) => {
+const AccordionComp = ({data,setDeleteModal,setCommentModal,comments}) => {
     
   
    
@@ -92,7 +92,14 @@ const AccordionComp = ({data,setDeleteModal}) => {
         <HiOutlinePencilAlt  className='text-2xl text-blue-500 cursor-pointer' />
         </div>
         <div className='flex'>
-        <HiInformationCircle  className='text-2xl text-yellow-300  cursor-pointer ' />
+        <HiInformationCircle  className='text-2xl text-yellow-300  cursor-pointer '
+        onClick={
+            ()=>{
+                setCommentModal(true)
+            }
+
+        }
+        />
         </div>
         </div>
       </Accordion.Content>

@@ -10,10 +10,13 @@ import {
 } from 'flowbite-react'
 import Select from 'react-select'
 import { HiOutlineFilter } from 'react-icons/hi'
+import CommentModal from '../components/CommentModal'
+import Title from '../components/Title'
 
 
-const Home = ({}) => {
+const Home = ({user}) => {
   const [deleteModal, setDeleteModal] = useState(false)
+  const [commentModal, setCommentModal] = useState(false)
   const [AllData, setAllData] = useState([
     {
       title:'Broken water pipe',
@@ -139,6 +142,22 @@ const Home = ({}) => {
     }
  ])
 
+ const comments = [
+  {
+      user: "John Doe",
+      comment: "The water pipe in the kitchen is broken and needs to be replaced",
+  },
+  {
+      user: "Jane Doe",
+      comment: "The door in the kitchen is not properly installed and needs to be fixed",
+  },
+  {
+      user: "John Doe",
+      comment: "There is a hectic noise coming from the kitchen",
+  },
+  ];
+ 
+
  const ClearFilters=()=>{
     setFilter({
       status:'all',
@@ -154,9 +173,18 @@ const Home = ({}) => {
   deleteModal={deleteModal}
   setDeleteModal={setDeleteModal}
   ></DeleteModal>
+  <CommentModal
+  commentModal={commentModal}
+  setCommentModal={setCommentModal}
+  comments={comments}
+  user={user}
+  ></CommentModal>
+  
  <header className=' flex justify-between mx-auto sm:mx-6'>
-    <h1 className="text-4xl font-semibold text-center text-gray-700 mb-6 text-3xl flex justify-center items-center ">Complaints <span className='bg-blue-700 text-white text-sm block w-8 h-8 flex justify-center items-center  rounded-full mt-1 ml-3'>
-    {ApplyFilter().length} </span></h1>
+   <Title
+   text='Complaints'
+   count={ApplyFilter().length}
+   ></Title>
     <div>
 
     </div>
@@ -204,6 +232,8 @@ const Home = ({}) => {
  </header>
 <Accordion data={ApplyFilter()}
 setDeleteModal={setDeleteModal}
+setCommentModal={setCommentModal}
+comments={comments}
 ></Accordion>
 </div>
   )
