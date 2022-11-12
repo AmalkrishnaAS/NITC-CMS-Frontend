@@ -10,15 +10,17 @@ import {
 from 'react-icons/hi'
 //import delete and edit icons
 import { HiOutlineTrash, HiOutlinePencilAlt,HiClock } from 'react-icons/hi'
+import CommentModal from './CommentModal'
+import DeleteModal from './DeleteModal'
 
 
 
-
-const AccordionComp = ({data,setDeleteModal,setCommentModal,comments}) => {
+const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModal,user,deleteModal}) => {
     
   
    
     data.sort((a,b)=>new Date(b.date)-new Date(a.date));
+   
    
   return (
     
@@ -29,7 +31,18 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments}) => {
     >
         {data.map((item,index)=>{
             return (
+                
                 <Accordion.Panel >
+                     <CommentModal
+  commentModal={commentModal}
+  setCommentModal={setCommentModal}
+  comments={item.comments}
+  user={user}
+  ></CommentModal>
+   <DeleteModal
+        deleteModal={deleteModal}
+        setDeleteModal={setDeleteModal}
+      ></DeleteModal>
       <Accordion.Title className='w-full'>
       <div className='p-3 flex'>
         <div className='flex'>

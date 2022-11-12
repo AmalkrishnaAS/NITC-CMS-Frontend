@@ -1,0 +1,38 @@
+{
+    "complaints": [
+        {
+            "id":1,
+            "title":"Hectic work",
+            "description":"I am working in a hectic environment",
+            "status":"open",
+            "date":"22-02-2019",
+            "type":"Other",
+            "remarks":null,
+            "comments":[
+                {
+                    "user":"John",
+                    "designation":"Manager",
+                    "comment":"Beat the students"
+                },
+                {
+                    "user":"John",
+                    "id": 2,
+                    "designation":"Manager",
+                    "comment":"Beat the students"
+                },
+                {
+                    "user":"John",
+                    "id": 1,
+                    "designation":"Manager",
+                    "comment":"Beat the students"
+                },
+                {
+                    "user":"John",
+                    "designation":"Manager",
+                    "comment":"Beat the students",
+                    "id": 3
+                }
+            ]
+        }
+    ]
+}

@@ -5,7 +5,7 @@ const CommentTable = ({commentList}) => {
     <table className='w-full' >
                 <tbody>
                {
-                 commentList.map(comment => (
+                 commentList?.map(comment => (
                   <tr className='border-y-[1px] '>
                   <td>
                   <div className="bg-white rounded-lg shadow-lg p-4">
