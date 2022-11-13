@@ -12,27 +12,41 @@
                 {
                     "user":"John",
                     "designation":"Manager",
-                    "comment":"Beat the students"
+                    "comment":"Beat the students",
+                    "email": "john3@gmail.com"
                 },
                 {
                     "user":"John",
                     "id": 2,
                     "designation":"Manager",
-                    "comment":"Beat the students"
+                    "comment":"Beat the students",
+                    "email": "john2@gmail.com"
                 },
                 {
                     "user":"John",
                     "id": 1,
                     "designation":"Manager",
-                    "comment":"Beat the students"
+                    "comment":"Beat the students",
+                    "email": "john1@gmail.com"
                 },
                 {
                     "user":"John",
                     "designation":"Manager",
                     "comment":"Beat the students",
-                    "id": 3
+                    "id": 3,
+                    "email": "john@gmail.com"
                 }
             ]
+        }
+    ],
+    "pending_reqs":[
+        {
+            "id":1,
+            "name":"John",
+            "designation":"Manager",
+            "email":"john123@gmail.com",
+            "type":"Other",
+            "isAuthorized":false
         }
     ]
 }

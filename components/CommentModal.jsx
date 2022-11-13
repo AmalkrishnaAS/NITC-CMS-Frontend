@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Label, TextInput, Checkbox } from "flowbite-react";
 import CommentTable from './CommentTable'
 
-const CommentModal = ({ commentModal, setCommentModal, user,comments }) => {
+const CommentModal = ({ commentModal, setCommentModal, user,comments,getAvatar }) => {
   const onClose = () => {
     setCommentModal(false);
   };
@@ -37,6 +37,7 @@ const CommentModal = ({ commentModal, setCommentModal, user,comments }) => {
                     </h1>
                     <CommentTable
                     commentList={comments}
+                    getAvatar={getAvatar}
                     />
                     
 

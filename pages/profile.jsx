@@ -3,7 +3,7 @@ import React from 'react'
 
 const profile = ({user}) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[90vh]  -mt-6  sm:px-6 lg:px-8 ">
+    <div className="flex flex-col items-center justify-center min-h-[90vh]  -mt-6  sm:px-6 lg:px-8  w-screen">
     <div className="pb-28 sm:pb-0 sm:pb-0  bg-gray-100 h-auto">
 
   <div className="container mx-auto my-5 p-5 pb-16">
@@ -49,16 +49,14 @@ const profile = ({user}) => {
                         
                          
                           <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Contact No.</div>
-                              <div className="px-4 py-2">9980010010</div>
+                            
                           </div>
                           <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Roll Number</div>
-                              <div className="px-4 py-2">B200999CS</div>
+                              
                           </div>
                           <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Address</div>
-                              <div className="px-4 py-2">221b Baker St, London, United Kingdom</div>
+                              <div className="px-4 py-2 font-semibold">Role</div>
+                              <div className="px-4 py-2">Admin</div>
                           </div>
                           <div className="grid grid-cols-2">
                               <div className="px-4 py-2 font-semibold">Email.</div>
@@ -67,8 +65,8 @@ const profile = ({user}) => {
                               </div>
                           </div>
                           <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Birthday</div>
-                              <div className="px-4 py-2">Feb 06, 2000</div>
+                              <div className="px-4 py-2 font-semibold">Assigned type</div>
+                              <div className="px-4 py-2">Academics</div>
                           </div>
                       </div>
                   </div>

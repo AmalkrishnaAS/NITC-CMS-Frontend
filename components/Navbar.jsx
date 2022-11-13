@@ -26,18 +26,14 @@ const Navbar = ({user,login,logout}) => {
         ]
 
         const userRoutes = [
-            {
-                name: 'Dashboard',
-                path: '/dashboard',
-                function: () => router.push('/dashboard')
-            },
+          
            
             {
                 name: 'Logout',
                 path: null,
                 function: () => {
                     setIsUserOpened(false)
-                    router.push('/')
+                    router.push('/login')
 
                     logout()}
             }
@@ -80,9 +76,9 @@ const Navbar = ({user,login,logout}) => {
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>
           <span class="block text-sm text-gray-900 dark:text-white">{
             //get name from email with first letter capital
-            user?.email.split('@')[0].charAt(0).toUpperCase() + user?.email.split('@')[0].slice(1)
+           user?.name
           }</span>
-          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+          <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{user?.email}</span>
         </div>
         <ul class="py-1" aria-labelledby="user-menu-button">
             {

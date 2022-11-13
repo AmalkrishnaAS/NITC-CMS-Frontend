@@ -9,13 +9,13 @@ import {
 }
 from 'react-icons/hi'
 //import delete and edit icons
-import { HiOutlineTrash, HiOutlinePencilAlt,HiClock } from 'react-icons/hi'
+import { HiOutlineTrash, HiOutlinePencilAlt,HiClock,HiChat } from 'react-icons/hi'
 import CommentModal from './CommentModal'
 import DeleteModal from './DeleteModal'
 
 
 
-const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModal,user,deleteModal}) => {
+const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModal,user,deleteModal,getAvatar}) => {
     
   
    
@@ -38,6 +38,7 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModa
   setCommentModal={setCommentModal}
   comments={item.comments}
   user={user}
+  getAvatar={getAvatar}
   ></CommentModal>
    <DeleteModal
         deleteModal={deleteModal}
@@ -94,7 +95,7 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModa
         </div>
         <div className='flex space-x-4 p-2'>
         <div className=''>
-        <HiOutlineTrash className='text-2xl text-red-500 cursor-pointer' onClick={
+        <HiOutlineTrash className='text-2xl text-red-500 hover:translate-y-[-1.5px] cursor-pointer' onClick={
             ()=>{
                 setDeleteModal(true)
             }
@@ -102,10 +103,10 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModa
         } />
         </div>
         <div className='flex'>
-        <HiOutlinePencilAlt  className='text-2xl text-blue-500 cursor-pointer' />
+        <HiOutlinePencilAlt  className='text-2xl text-blue-500 hover:translate-y-[-1.5px]  cursor-pointer' />
         </div>
         <div className='flex'>
-        <HiInformationCircle  className='text-2xl text-yellow-300  cursor-pointer '
+        <HiChat  className='text-2xl text-blue-500 hover:translate-y-[-1.5px]   cursor-pointer '
         onClick={
             ()=>{
                 setCommentModal(true)

@@ -12,7 +12,7 @@ const users = () => {
   return (
     <div>
         <header className='flex  my-4 px-4 '>
-        <Title text='Pending Requests' count='2' />
+        <Title text='Pending Requests' count='1' />
         </header>
         <UsersTable />
       

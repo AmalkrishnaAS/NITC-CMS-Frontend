@@ -1,17 +1,15 @@
-import Head from "next/head";
-import Image from "next/image";
+
 import Accordion from "../components/Accordion";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-import DeleteModal from "../components/DeleteModal";
 import { Button } from "flowbite-react";
 import Select from "react-select";
 import { HiOutlineFilter } from "react-icons/hi";
-import CommentModal from "../components/CommentModal";
 import Title from "../components/Title";
+import { useRouter } from "next/router";
 
-const Home = ({ user }) => {
+const Home = ({ user}) => {
+  const router = useRouter();
   const [deleteModal, setDeleteModal] = useState(false);
   const [commentModal, setCommentModal] = useState(false);
   const [AllData, setAllData] = useState([
@@ -26,6 +24,11 @@ const Home = ({ user }) => {
         setAllData(res.data);
       })
       .catch((err) => console.log(err));
+
+
+      if(!user){
+        router.push('/login')
+      }
   }, []);
 
   const options1 = [
