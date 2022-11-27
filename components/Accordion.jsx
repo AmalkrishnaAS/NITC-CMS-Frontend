@@ -12,14 +12,36 @@ from 'react-icons/hi'
 import { HiOutlineTrash, HiOutlinePencilAlt,HiClock,HiChat } from 'react-icons/hi'
 import CommentModal from './CommentModal'
 import DeleteModal from './DeleteModal'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 
-const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModal,user,deleteModal,getAvatar}) => {
+const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,user,getAvatar,setAllData}) => {
+    const router = useRouter()
+    const deleteComplaint=async (id)=>{
+        console.log(id)
+        console.log(`complaint ${id} `)
+      const  res=await axios.delete(`http://localhost:5000/complaint/${id}`,
+        {
+            headers:{
+                'x-access-token':localStorage.getItem('token')
+            }
+        }
+        )
+        console.log(res)
+
+        //update local data after deleting
+       
+        setDeleteModal(false)
+
+    }
     
   
    
     data.sort((a,b)=>new Date(b.date)-new Date(a.date));
+   
    
    
   return (
@@ -30,20 +52,26 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModa
     alwaysOpen={true}
     >
         {data.map((item,index)=>{
+            console.log(item.id)
+
             return (
                 
                 <Accordion.Panel >
-                     <CommentModal
+                     {/* <CommentModal
   commentModal={commentModal}
   setCommentModal={setCommentModal}
   comments={item.comments}
   user={user}
   getAvatar={getAvatar}
-  ></CommentModal>
-   <DeleteModal
+  item={item}
+  ></CommentModal> */}
+   {/* <DeleteModal
         deleteModal={deleteModal}
         setDeleteModal={setDeleteModal}
-      ></DeleteModal>
+        deleteComplaint={deleteComplaint}
+        id={item.id}
+        
+      ></DeleteModal> */}
       <Accordion.Title className='w-full'>
       <div className='p-3 flex'>
         <div className='flex'>
@@ -95,21 +123,37 @@ const AccordionComp = ({data,setDeleteModal,setCommentModal,comments,commentModa
         </div>
         <div className='flex space-x-4 p-2'>
         <div className=''>
-        <HiOutlineTrash className='text-2xl text-red-500 hover:translate-y-[-1.5px] cursor-pointer' onClick={
+       {user?.role==='User'&&item.status==='Open'&& <HiOutlineTrash className='text-2xl text-red-500 hover:translate-y-[-1.5px] cursor-pointer' onClick={
             ()=>{
-                setDeleteModal(true)
+
+                if(item.status!=='Open'){
+                    toast.error('You can only delete open complaints')
+                }
+                else{
+                setDeleteId(item.id)
+                }
             }
 
-        } />
+        } />}
         </div>
         <div className='flex'>
-        <HiOutlinePencilAlt  className='text-2xl text-blue-500 hover:translate-y-[-1.5px]  cursor-pointer' />
+        <HiOutlinePencilAlt  className='text-2xl text-blue-500 hover:translate-y-[-1.5px]  cursor-pointer' onClick={
+            ()=>{
+
+                if(user?.role==='User'&&item.status!=='Open'){
+                    toast.error('You can only edit open complaints')
+                }
+                else{
+                router.push(`update/${item.id}`)
+                }
+            }
+        } />
         </div>
         <div className='flex'>
         <HiChat  className='text-2xl text-blue-500 hover:translate-y-[-1.5px]   cursor-pointer '
         onClick={
             ()=>{
-                setCommentModal(true)
+                setSelectedData(item)
             }
 
         }

@@ -7,29 +7,68 @@ import Select from "react-select";
 import { HiOutlineFilter } from "react-icons/hi";
 import Title from "../components/Title";
 import { useRouter } from "next/router";
+import DeleteModal from "../components/DeleteModal";
+import CommentModal from "../components/CommentModal";
+import {toast} from 'react-toastify'
 
 const Home = ({ user}) => {
+
+  const [localComments,setLocalComments]=useState([])
+
+  //delete id state
+  const [deleteId, setDeleteId] = useState(null);
+  //state for selected data
+  const [selectedData, setSelectedData] = useState(null);
   const router = useRouter();
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [commentModal, setCommentModal] = useState(false);
+  
+  const [data, setData] = useState([]);
   const [AllData, setAllData] = useState([
    
   ]);
+  const [compalaints,setComplaints]=useState(null)
+
+  const deleteComplaint=async ()=>{
+    console.log(`complaint ${deleteId} `)
+  const  res=await axios.delete(`http://localhost:5000/complaint/${deleteId}`,
+    {
+        headers:{
+            'x-access-token':localStorage.getItem('token')
+        }
+    }
+    )
+    console.log(res)
+
+    //update local data after deleting
+   
+    setDeleteId(null)
+
+}
+const [comment, setComment] = useState("");
+  //remarks state
+  const [remarks, setRemarks] = useState("");
+
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/complaints")
+      .get("http://localhost:5000/complaints",{
+        headers:{
+          'x-access-token':localStorage.getItem('token')
+        }
+      })
       .then((res) => {
-        console.log(res.data);
-        setAllData(res.data);
+        console.log(res.data.Complaints);
+        setAllData(res.data.Complaints);
+        setData(res.data.Complaints);
       })
       .catch((err) => console.log(err));
 
 
-      if(!user){
-        router.push('/login')
-      }
-  }, []);
+     const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+    }
+
+  }, [selectedData,deleteId,AllData]);
 
   const options1 = [
     {
@@ -37,16 +76,16 @@ const Home = ({ user}) => {
       value: "all",
     },
     {
-      label: "Maintainance",
-      value: "Maintainance",
+      label: "Maintainence",
+      value: "Maintainence",
     },
     {
       label: "Academic",
       value: "Academic",
     },
     {
-      label: "Hostels",
-      value: "Hostels",
+      label: "Hostel",
+      value: "Hostel",
     },
     {
       label: "Other",
@@ -63,11 +102,16 @@ const Home = ({ user}) => {
       value: "Open",
     },
     {
-      label: "Closed",
-      value: "Closed",
+      label: "Processing",
+      value: "Processing",
+    },
+    {
+      label: "Resolved",
+      value: "Resolved",
     },
   ];
   const [open, setOpen] = useState(false);
+  
   const [filter, setFilter] = useState({
     status: "all",
     type: "all",
@@ -101,8 +145,122 @@ const Home = ({ user}) => {
     });
     setData(AllData);
   };
+
+
+ 
+
+  
+  const onClose = () => {
+    setSelectedData(null)
+  };
+
+  const handleChange1 = (e) => {
+   
+    setRemarks(e.target.value);
+    console.log(e.target.value);
+
+  };
+
+
+  const handleChange2 = (e) => {
+    console.log(e.target.value);
+    setComment(e.target.value);
+    console.log(comment);
+  };
+
+  const handleSubmit1 = async (e) => {
+    e.preventDefault();
+    if(selectedData?.status==="Resolved"){
+      toast.warn("Complaint is already resolved")
+      console.log(selectedData?.remarks)
+      setRemarks("")
+      return;
+    }
+    const res=axios.post('http://localhost:5000/resolve/'+selectedData.id,{
+      remarks:remarks,
+  },{
+      headers:{
+          'x-access-token':localStorage.getItem('token')
+      }
+  })
+
+  console.log(res);
+  setRemarks("")
+  setSelectedData(
+    {
+      ...selectedData,
+      status:"Resolved",
+      remarks:remarks
+    }
+  )
+   setSelectedData(null)
+  };
+
+  const handleSubmit2 = (e) => {
+    e.preventDefault();
+   //check if there is a comment with the same user email as the current user
+   if(selectedData?.comments.filter((comment) => comment.email === user.email).length>0){
+    toast.error("You have already commented on this complaint")
+    setComment("")
+    return
+  }
+
+  
+
+  setSelectedData(null)
+
+    console.log("form submitted");
+    const res=axios.post('http://localhost:5000/comment/'+selectedData.id,{
+      comment:comment,
+  },{
+      headers:{
+          'x-access-token':localStorage.getItem('token')
+      }
+  })
+
+
+    console.log("form submitted");
+    const commentObj = comment;
+    const userObj = {
+      user: user.name,
+      email: user.email,
+      designation: user.designation,
+    }
+    const newComment = {
+      comment: comment,
+      ...userObj
+    };
+    setSelectedData({
+      ...selectedData,
+      comments: [...selectedData.comments, newComment],
+    })
+    setComment("");
+  };
+
   return (
-    <div className="p-4 overflow-auto">
+    <>
+    <DeleteModal
+    deleteId={deleteId}
+    setDeleteId={setDeleteId}
+    deleteComplaint={deleteComplaint}
+
+    
+    ></DeleteModal>
+    <CommentModal
+    selectedData={selectedData}
+    setSelectedData={setSelectedData}
+    user={user}
+    handleChange1={handleChange1}
+    handleChange2={handleChange2}
+    handleSubmit1={handleSubmit1}
+    handleSubmit2={handleSubmit2}
+    setComment={setComment}
+    setRemarks={setRemarks}
+    complaints={selectedData}
+    comment={comment}
+    remarks={remarks}
+    ></CommentModal>
+        {!(user?.role==='section head'&&user?.is_Authorized==false)?<div className="p-4 overflow-auto">
      
 
       <header className=" flex justify-between mx-auto sm:mx-6">
@@ -144,15 +302,33 @@ const Home = ({ user}) => {
           )}
         </div>
       </header>
-      <Accordion
+      <Accordion 
+      setAllData={setAllData}
         data={ApplyFilter()}
-        setDeleteModal={setDeleteModal}
-        setCommentModal={setCommentModal}
-        commentModal={commentModal}
-        deleteModal={deleteModal}
+        // setDeleteModal={setDeleteModal}
+        // setCommentModal={setCommentModal}
+        // commentModal={commentModal}
+        // deleteModal={deleteModal}
+        setDeleteId={setDeleteId}
+        setSelectedData={setSelectedData}
+        deleteId={deleteId}
+        selectedData={selectedData}
         user={user}
+        
       ></Accordion>
+    </div>:
+    <div className="flex text-xl justify-center items-center flex-col space-y-3 h-screen">
+      You are not authorized. Contact Commitee head for more info 
+      <Button
+      onClick={
+        ()=>router.push('/login')
+      }
+      >
+        Go Back
+      </Button>
     </div>
+    }
+    </>
   );
 };
 

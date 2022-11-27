@@ -1,12 +1,78 @@
 import React from 'react'
 import Select from 'react-select'
-
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import {
+  Textarea,
+  Label,TextInput,Button
+} from 'flowbite-react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 const create = ({user}) => {
+  const router = useRouter();
+  useEffect(() => {
+
+    if(user?.role!=="User") {
+      router.push('/')
+    }
+    
+  
+    
+  }, [])
+  
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        type: "",
+        status: "Open",
+        location: "",
+
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+
+    };
+
+    const handleSelect = (event,action) => {
+        setFormData({
+            ...formData,
+            [action.name]: event.value,
+        });
+    };
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(localStorage.getItem('token'))
+        const res=await axios.post('http://localhost:5000/complaint',{
+          title:formData.title,
+          description:formData.description,
+          type:formData.type,
+          status:formData.status,
+          location:formData.location
+        },
+        {headers:{
+          'x-access-token':localStorage.getItem('token')
+        }})
+        console.log(localStorage.getItem('token'))
+        console.log(res)
+
+        router.push('/')
+
+        
+
+        
+    };
 
   const opts=[
     {
-      value:'Maintainance',
-      label:'Maintainance'
+      value:'Maintainence',
+      label:'Maintainence'
     },
     {
       value:'Academic',
@@ -27,36 +93,129 @@ const create = ({user}) => {
     <div className="p-6 max-w-[900px] mx-auto">
       <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Raise a Complaint</h1>
         
-    <form>
-    <div class="relative z-0 mb-6 w-full group">
-        <input type="text" name="floating_email" id="floating_email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Title</label>
-    </div>
-    <div class="relative z-0 mb-6 w-full group -z-10">
-        <textarea type="text" name="floating_password" id="floating_password" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="floating_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
-    </div>
+    <form onSubmit={
+        handleSubmit
+    }>
+    <div>
+  <div className="mb-2 block">
+    <Label
+      htmlFor="email3"
+      value="Title"
+    />
+  </div>
+  <TextInput
+    id="Title"
+    type="Text"
+    placeholder="Title"
+    required={true}
+    name="title"
+    value={formData.title}
+    onChange={handleChange}
+   
+  />
+</div>
+    <div>
+  <div className="mb-2 block">
+    <Label
+      htmlFor="Name"
+      value="Full Name"
+    />
+  </div>
+  <TextInput
+    id="Name"
+    type="text"
+    value={user?.name}
+    disabled={true}
+    placeholder="John Doe"
+    required={true}
+   
+  />
+</div>
+    <div>
+  <div className="mb-2 block">
+    <Label
+      htmlFor="email3"
+      value="Your email"
+    />
+  </div>
+  <TextInput
+    id="email3"
+    type="email"
+    placeholder="name@flowbite.com"
+    value={user?.email}
+    required={true}
+   
+  />
+</div>
+    <div>
+  <div className="mb-2 block">
+    <Label
+      htmlFor="email3"
+      value="Your department"
+    />
+  </div>
+  <TextInput
+    id="email3"
+    type="text"
+    value={user?.department}
+    placeholder="Computer Science"
+    required={true}
+   
+  />
+</div>
+    <div>
+  <div className="mb-2 block">
+    <Label
+      htmlFor="email3"
+      value="location"
+    />
+  </div>
+  <TextInput
+    id="location"
+    type="text"
+    value={user?.location}
+    placeholder="Mini Canteen"
+    required={true}
+    name="location"
+    onChange={handleChange}
+   
+  />
+</div>
+    <div id="textarea">
+  <div className="mb-2 block">
+    <Label
+      htmlFor="description"
+      value="Description"
+    />
+  </div>
+  <Textarea
+    id="description"
+    placeholder="Describe your issue"
+    required={true}
+    rows={4}
+    name="description"
+    value={formData.description}
+    onChange={handleChange}
+  />
+</div>
     
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 mb-6 w-full group">
-          <input value={user?.email} type="text" name="floating_first_name" id="floating_first_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label for="floating_first_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+   
+      
+      <div class="relative z-0 mb-6 w-full group mt-4">
+          <Select placeholder='Type' options={opts}
+          onChange={handleSelect}
+          name="type"
+        
+
+          
+          ></Select>
       </div>
-      <div class="relative z-0 mb-6 w-full group">
-          <input value={user?.name} type="text" name="floating_last_name" id="floating_last_name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label for="floating_last_name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Full Name</label>
-      </div>
-    </div>
-    <div class="grid md:grid-cols-2 md:gap-6">
-      <div class="relative z-0 mb-6 w-full group">
-          <input value={user?.department} type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="floating_phone" id="floating_phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-          <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Department</label>
-      </div>
-      <div class="relative z-0 mb-6 w-full group">
-          <Select placeholder='Type' options={opts}></Select>
-      </div>
-    </div>
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+   
+   <Button
+   type='submit'
+   >
+      Submit
+   </Button>
   </form>
   </div>
   )

@@ -6,12 +6,105 @@ import {
 
 } from 'flowbite-react'
 import Link from 'next/link'
+import { useState } from 'react'
+import axios from 'axios'
+import {toast} from 'react-toastify'
+import Select from 'react-select'
+import { useRouter } from 'next/router'
 
 const CommitteReg = () => {
+  const router=useRouter()
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    designation: "",
+    role:"section head",
+    type:""
+  });
+  const opts=[
+    {
+      value:'Maintainence',
+      label:'Maintainence'
+    },
+    {
+      value:'Academic',
+      label:'Academic'
+      
+    },
+    {
+      value:'Hostel',
+      label:'Hostel'
+    },
+    {
+      value:'Other',
+      label:'Other'
+    }
+
+  ]
+
+  const handleSelect = (event,action) => {
+    setFormData({
+      ...formData,
+      [action.name]: event.value,
+    });
+  };
+
+  const handleChange = async (e) => {
+  
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async  (e) => {
+    e.preventDefault();
+    console.log(formData.role)
+    if(formData.password!=formData.cpassword){
+      toast.error("Password and Confirm Password should be same")
+    }
+    else{
+      try{
+        const res=await axios.post('http://localhost:5000/signup',{
+          name:formData.name,
+          email:formData.email,
+          password:formData.password,
+          designation:formData.designation,
+          role:'section head',
+          type:formData.type
+        })
+        console.log(res.data)
+        toast.success("Committee Member Registered Successfully")
+
+      } catch(error){
+        console.log(error)
+        toast.error("Committee Member Already Registered")
+      }
+
+      router.push('/login')
+     
+      
+    }
+    console.log(formData);
+    //clear form
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      cpassword: "",
+      designation: "",
+    });
+  };
   return (
-    <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8 overflow-hidden">
+    <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8 mb-8">
       <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Register as a Committee Member </h3>
-    <form className="">
+    <form className=""
+    onSubmit={
+        handleSubmit
+    }>
+    
     <div>
     
       
@@ -28,6 +121,8 @@ const CommitteReg = () => {
         placeholder="John Doe"
         required={true}
         shadow={true}
+        onChange={handleChange}
+        value={formData.name}
         
       />
       
@@ -49,6 +144,9 @@ const CommitteReg = () => {
         placeholder="john@nitc.ac.in"
         required={true}
         shadow={true}
+        onChange={handleChange}
+
+        value={formData.email}
         
       />
       
@@ -69,6 +167,9 @@ const CommitteReg = () => {
         placeholder="HOD"
         required={true}
         shadow={true}
+        name="designation"
+        onChange={handleChange}
+        value={formData.designation}
         
       />
       
@@ -90,6 +191,8 @@ const CommitteReg = () => {
         name='password'
         required={true}
         shadow={true}
+        onChange={handleChange}
+        value={formData.password}
         
       />
       
@@ -111,8 +214,17 @@ const CommitteReg = () => {
         placeholder="********"
         required={true}
         shadow={true}
+        onChange={handleChange}
+        value={formData.cpassword}
         
       />
+      <Select
+      options={opts}
+      onChange={handleSelect}
+      name="type"
+      placeholder="Select Type"
+      className="mt-3"
+      ></Select>
       
       
     </div>

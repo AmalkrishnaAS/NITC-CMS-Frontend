@@ -8,13 +8,66 @@ import {
     import {HiMail} from 'react-icons/hi'
     import Link from 'next/link'
     import { useState } from 'react'
+    import {toast} from 'react-toastify'
 
+import axios from 'axios'
+import { useRouter } from 'next/router'
+const UserReg = () => {
+  const router=useRouter()
+  //formData is the state variable
+  //setFormData is the function to update the state variable
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    cpassword: '',
+    department: '',
+    id: '',
+    name:''
+  })
+  const handleSubmit = (e) => {
+    e.preventDefault()  
+    if(formData.password!=formData.cpassword){
+    toast.error("Passwords do not match")
+    }
 
-const StudentReg = () => {
+    //check if the email ends with @nitc.ac.in
+    if(!formData.email.endsWith("@nitc.ac.in")){
+      toast.error("Email must end with @nitc.ac.in")
+      return
+    }
+    else{
+      try{
+        const res=axios.post('http://localhost:5000/signup',{
+          email:formData.email,
+          password:formData.password,
+          department:formData.department,
+          id:formData.id,
+          role:"user",
+          name:formData.name
+        })
+        console.log(res.data)
+        toast.success("User Registered Successfully")
+      } catch(error){
+        console.log(error)
+        toast.error("User Already Registered")
+      }
+    }
+    console.log(formData)
+    router.push('/login')
+    
+  }
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
+  }
   return (
     <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8 overflow-hidden">
-      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Register as a student</h3>
-    <form className="">
+      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Register as a User</h3>
+    <form className=""
+    onSubmit={handleSubmit}
+    >
     <div>
     
       
@@ -31,32 +84,14 @@ const StudentReg = () => {
         placeholder="John Doe"
         required={true}
         shadow={true}
+        value={formData.name}
+        onChange={handleChange}
         
       />
       
       
     </div>
-    <div>
     
-      
-      <div className="mb-2 block">
-        <Label
-          htmlFor="rollno"
-          value="Roll Number"
-        />
-      </div>
-      <TextInput
-        id="rollno"
-        name="rollno"
-        type="text"
-        placeholder="B200729CS"
-        required={true}
-        shadow={true}
-        
-      />
-      
-      
-    </div>
     <div>
     
       
@@ -73,6 +108,8 @@ const StudentReg = () => {
         placeholder="john@nitc.ac.in"
         required={true}
         shadow={true}
+        value={formData.email}
+        onChange={handleChange}
         
       />
       
@@ -93,6 +130,10 @@ const StudentReg = () => {
         placeholder="Computer Science and Engineering"
         required={true}
         shadow={true}
+        value={formData.department}
+        onChange={handleChange}
+        name='department'
+
         
       />
       
@@ -114,6 +155,8 @@ const StudentReg = () => {
         name='password'
         required={true}
         shadow={true}
+        value={formData.password}
+        onChange={handleChange}
         
       />
       
@@ -135,6 +178,8 @@ const StudentReg = () => {
         placeholder="********"
         required={true}
         shadow={true}
+        value={formData.cpassword}
+        onChange={handleChange}
         
       />
       
@@ -161,4 +206,4 @@ const StudentReg = () => {
   )
 }
 
-export default StudentReg
+export default UserReg

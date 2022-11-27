@@ -7,9 +7,14 @@ import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/avatars-bottts-sprites";
 import { useRouter } from "next/router";
 import FooterComp from "../components/Footer";
-import {getAvatar} from '../fns'
+import { getAvatar } from "../lib/fns";
+import {toast} from 'react-toastify'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
+const router = useRouter();
+  
 
   // const getAvatar= (name) => {
   //   return createAvatar(style, {
@@ -19,37 +24,32 @@ function MyApp({ Component, pageProps }) {
   // };
 
   const [user, setUser] = useState(null);
-  const login = () => {
-    setUser({
-      email: "john@nitc.ac.in",
-      role: "admin",
-      avatar: null,
-      id:"B200729CS",
-      department: "CSE",
-      joined: "2021-05-12", //return as date stiring from backend
-      name: "John Doe",
-      fa: "Saleena N",
-    });
-    setUser((prev) => {
-      return {
-        ...prev,
-        avatar: getAvatar(prev.email),
-      };
-    });
 
-    router.push("/");
-  };
+  useEffect(() => {
+    const curr=localStorage.getItem('user')
+    if(curr){
+      setUser(JSON.parse(curr))
+      setUser((prev)=>({...prev,avatar:getAvatar(prev.email)}))
+    }
+  }, []);
+  
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     router.push("/login");
   };
 
   return (
     <>
-      <Navbar user={user} login={login} logout={logout} setUser={setUser} />
+    <ToastContainer/>
+    
+      <Navbar user={user}  logout={logout} setUser={setUser} />
 
       <div className=" ">
-        <Component {...pageProps} user={user} setUser={setUser}  />
+        <Component {...pageProps} user={user} setUser={setUser} logout={
+          logout
+        }  />
 
         {/* <FooterComp/> */}
       </div>

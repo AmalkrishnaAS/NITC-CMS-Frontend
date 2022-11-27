@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "flowbite-react";
 import CommitteReg from "./CommitteReg";
-import StudentReg from "./StudentReg";
+import UserReg from "./UserReg";
 const TabGroup = () => {
   return (
     <div className='h-1/2  mx-auto'>
@@ -9,8 +9,8 @@ const TabGroup = () => {
       
       > 
        
-        <Tabs.Item title="Student">
-            <StudentReg />
+        <Tabs.Item title="User">
+            <UserReg />
         </Tabs.Item>
         
         <Tabs.Item active={true} title="Committee">

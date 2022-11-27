@@ -9,7 +9,21 @@ import {
     import {HiMail} from 'react-icons/hi'
     import Link from 'next/link'
     import { useState } from 'react'
-const register = ({}) => {
+    import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+const register = ({user}) => {
+  const router=useRouter()
+
+  useEffect(() => {
+    if(user) 
+    {
+      router.replace('/')
+    }
+    
+  }, [])
+  
+
+  
   const [isCoommittee, setisCoommittee] = useState(false)
 
 

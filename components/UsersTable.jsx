@@ -6,20 +6,49 @@ import {HiTrash,
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-import {getAvatar} from '../fns'
-const UsersTable = () => {
-  const [users, setUsers] = useState([]);
+import {getAvatar} from '../lib/fns'
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/pending_reqs')
-    .then(res => {
-      console.log(res.data)
-      setUsers(res.data)
+const UsersTable = ({users,
+setUsers
+}) => {
+  const authorizeUser = async (id) => {
+    // const router = useRouter()
+   const url='http://localhost:5000/authorize/'+id
+   const  res=await axios.get('http://localhost:5000/authorize/'+id,{
+    headers:{
+      'x-access-token':localStorage.getItem('token')
     }
-    )
+})
+    console.log(res)
+    setUsers(users.filter(user=>user._id!==id))
+    toast.success('User Authorized')
+    
   
+   
+   
   
-  }, [])
+  }
+
+  const deleteUser = async (id) => {
+    try {
+      const res = await axios.delete('http://localhost:5000/rmUser/'+id, {
+        headers: {
+          'x-access-token': localStorage.getItem('token')
+        }
+      })
+
+      console.log(res.data)
+      toast.success("User Deleted")
+      setUsers(users.filter(user=>user._id!==id))
+    } catch (error) {
+      console.log(error)
+      toast.error("User Deletion Failed")
+    }
+  }
+  
+ 
   
   return (
     <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -60,8 +89,16 @@ const UsersTable = () => {
           <td class="py-4 px-6">
            
             <div className="flex space-x-3">
-              <HiCheckCircle className="text-green-500 sm:h-6 sm:w-6 cursor-pointer" />
-              <HiTrash className="text-red-500 sm:h-6 sm:w-6 cursor-pointer" />
+              <HiCheckCircle className="text-green-500 sm:h-6 sm:w-6 cursor-pointer"
+              onClick={
+                ()=>authorizeUser(item.id)
+              }
+              />
+              <HiTrash className="text-red-500 sm:h-6 sm:w-6 cursor-pointer"
+              onClick={
+                ()=>deleteUser(item.id)
+              }
+              />
 
             </div>
             

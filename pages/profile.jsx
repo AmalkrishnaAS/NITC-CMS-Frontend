@@ -1,89 +1,105 @@
 import { Button } from 'flowbite-react'
 import React from 'react'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import {
+    Label,
+    TextInput,
+    Avatar
 
-const profile = ({user}) => {
+} from 'flowbite-react'
+
+
+const profile = ({user,logout
+}) => {
+    const router=useRouter()
+
+    useEffect(() => {
+
+       if(!localStorage.getItem('token')){
+           router.push('/login')
+       }
+    
+      
+    }, [])
+    
+
+
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-[90vh]  -mt-6  sm:px-6 lg:px-8  w-screen">
-    <div className="pb-28 sm:pb-0 sm:pb-0  bg-gray-100 h-auto">
 
-  <div className="container mx-auto my-5 p-5 pb-16">
-      <div className="md:flex no-wrap md:-mx-2 ">
-   
-          <div className="w-full md:w-3/12 md:mx-2">
-              {/* <!-- Profile Card --> */}
-              <div className="bg-white p-3 border-t-4 border-blue-400">
-                  <div className="image overflow-hidden h-52 w-52 mx-auto">
-                      <img className=" mx-auto"
-                          src={user?.avatar}
-                          alt=""/>
-                  </div>
-                  <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user?.name}</h1>
-                  <h3 className="text-gray-600 font-lg text-semibold leading-6 capitalize">{user?.role}</h3>
-              
-                
-              </div>
-              {/* <!-- End of profile card --> */}
-              <div className="my-4"></div>
-             
-          </div>
+    
+    <div className="w-sceen flex flex-col space-y-3 items-center mt-6 py-3">
+    <img
+        className="w-40 h-40 rounded-full"
+        src={user?.avatar}
+        alt="Jese image"
+        />
+        <div className="mb-9">
+      <Label className="mb-2">Name</Label>
+      <TextInput
+        className="w-full"
+        placeholder="Remarks"
+        value={user?.name}
+        disabled={true}
+      />
+    </div>
+        <div className="">
+      <Label className="mb-2">Email</Label>
+      <TextInput
+        className="w-full"
+        placeholder="Remarks"
+        value={user?.email}
+        disabled={true}
+      />
+    </div>
+        <div className="mb-9">
+      <Label className="mb-2">Type</Label>
+      <TextInput
+        className="w-full"
+        placeholder="Remarks"
+        value={user?.type || 'Not Specified'}
+        disabled={true}
+      />
      
-          <div className="w-full md:w-9/12 mx-2 h-64">
-              {/*<!-- About Section --> */}
-              <div className="bg-white p-3 shadow-sm rounded-sm">
-                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                      <span clas="text-blue-500">
-                          {/* <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                              stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg> */}
-                      </span>
-                      <span className="tracking-wide">About</span>
-                  </div>
-                  <div className="text-gray-700">
-                      <div className="grid md:grid-cols-2 text-sm">
-                          <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold"> Name</div>
-                              <div className="px-4 py-2">{user?.name}</div>
-                          </div>
-                        
-                         
-                          <div className="grid grid-cols-2">
-                            
-                          </div>
-                          <div className="grid grid-cols-2">
-                              
-                          </div>
-                          <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Role</div>
-                              <div className="px-4 py-2">Admin</div>
-                          </div>
-                          <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Email.</div>
-                              <div className="px-4 py-2">
-                                  <a className="text-blue-700" href={`mailto:${user?.email}`}>{user?.email}</a>
-                              </div>
-                          </div>
-                          <div className="grid grid-cols-2">
-                              <div className="px-4 py-2 font-semibold">Assigned type</div>
-                              <div className="px-4 py-2">Academics</div>
-                          </div>
-                      </div>
-                  </div>
-                  <button
-                      className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4 uppercase tracking-wide text-blue-700">Logout</button>
-                  {user?.role==='admin'&&<button
-                      className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4 uppercase tracking-wide text-blue-700" onc>Manage Users</button>}
-              </div>
-              {/* <!-- End of about section --> */}
-
-              {/* <div className="my-4"></div> */}
-
-          </div>
-      </div>
-  </div>
-</div>
-  </div>
+    </div>
+        <div className="mb-9">
+      <Label className="mb-2">Role</Label>
+      <TextInput
+        className="w-full"
+        placeholder="Remarks"
+        value={user?.role || 'Not Specified'}
+        disabled={true}
+      />
+     
+    </div>
+        <div className="mb-9">
+      <Label className="mb-2">Department</Label>
+      <TextInput
+        className="w-full"
+        placeholder="Remarks"
+        value={user?.department || 'Not Specified'}
+        disabled={true}
+      />
+     
+    </div>
+        <Button
+        onClick={
+            logout
+        }
+        >
+            Logout
+        </Button>
+      { user?.role==='committee head' && <Button
+        onClick={
+            ()=>router.push('/users')
+        }
+        >
+            Manage Users
+        </Button>}
+    
+    
+    </div>
   )
 }
 

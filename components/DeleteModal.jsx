@@ -4,28 +4,30 @@ import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import {
     Button
 } from 'flowbite-react'
+import axios from 'axios'
 
 const DeleteModal = ({
-    deleteModal,
-    setDeleteModal,
+    deleteId,
+    setDeleteId,
+    deleteComplaint
     
 }) => {
+
+ 
    
 
 
   return (
     <React.Fragment >
   
-  <Modal
+  {<Modal
   
-    show={deleteModal}
+    show={deleteId!==null}
     className='h-screen'
     size="md"
     popup={true}
     onClose={
-        () => {
-            setDeleteModal(false)
-        }
+        ()=>{setDeleteId(null)}
     }
   >
     <Modal.Header />
@@ -39,10 +41,7 @@ const DeleteModal = ({
           <Button
             className='bg-red-500 hover:bg-red-600 focus:ring-red-500'
             onClick={
-                () => {
-                    setDeleteModal(false)
-                }
-
+               deleteComplaint
             }
           >
             Yes, I'm sure
@@ -60,7 +59,7 @@ const DeleteModal = ({
         </div>
       </div>
     </Modal.Body>
-  </Modal>
+  </Modal>}
 </React.Fragment>
 
   )
