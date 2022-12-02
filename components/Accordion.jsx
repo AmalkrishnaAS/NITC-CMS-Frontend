@@ -15,7 +15,7 @@ import DeleteModal from './DeleteModal'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-
+import {HiLocationMarker} from 'react-icons/hi'
 
 
 const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,user,getAvatar,setAllData}) => {
@@ -113,6 +113,19 @@ const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,u
     >
          {
                 item.type
+            }
+    </span>
+    </Badge>
+    <Badge icon={HiLocationMarker}
+       className='text-sm text-blue-800 sm:text-md'
+        >
+        
+            
+    <span 
+    className='p-2'
+    >
+         {
+                item?.location
             }
     </span>
     </Badge>

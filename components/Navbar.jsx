@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Button } from 'flowbite-react'
-const Navbar = ({user,login,logout}) => {
+const Navbar = ({user,login,logout,isUserOpened,setIsUserOpened}) => {
     const router = useRouter()
     const routes= [
         {
@@ -43,7 +43,7 @@ const Navbar = ({user,login,logout}) => {
 
 
     const [isOpened, setIsOpened] = useState(false)
-    const [isUserOpened, setIsUserOpened] = useState(false)
+   
     const toggleMenu = () => {
         setIsOpened(!isOpened)
     }
@@ -54,7 +54,7 @@ const Navbar = ({user,login,logout}) => {
         <nav class="bg-white   border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 shadow-md w-full z-1000   ">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
   <a href="https://www.nitc.ac.in" class="flex items-center">
-      <img src="https://upload.wikimedia.org/wikipedia/en/d/d0/National_Institute_of_Technology%2C_Calicut_Logo.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+      <img src="favicon.png" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
       <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">NITC-CMS</span>
   </a>
   <div class="flex items-center md:order-2">
@@ -72,7 +72,7 @@ const Navbar = ({user,login,logout}) => {
       
       <div class={` ${
         isUserOpened ? 'block' : 'hidden'
-      } z-100  my-4 text-base list-none bg-white z-500 rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 md:top-[42px] right-24
+      } z-100  my-4 text-base list-none bg-white z-500 rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute  w-40 top-9 md:top-[42px] right-16
       
       `}>
         <div class="py-3 px-4 hover:bg-gray-200 cursor-pointer" onClick={()=>router.push('/profile')}>

@@ -13,6 +13,10 @@ import { useRouter } from "next/router";
 const UsersTable = ({users,
 setUsers
 }) => {
+
+  useEffect(() => {
+    console.log(users)
+  }, [users])
   const authorizeUser = async (id) => {
     // const router = useRouter()
    const url='http://localhost:5000/authorize/'+id
@@ -22,7 +26,7 @@ setUsers
     }
 })
     console.log(res)
-    setUsers(users.filter(user=>user._id!==id))
+    setUsers(users.filter(user=>user.id!==id))
     toast.success('User Authorized')
     
   
@@ -41,7 +45,7 @@ setUsers
 
       console.log(res.data)
       toast.success("User Deleted")
-      setUsers(users.filter(user=>user._id!==id))
+      setUsers(users.filter(user=>user?.id!==id))
     } catch (error) {
       console.log(error)
       toast.error("User Deletion Failed")

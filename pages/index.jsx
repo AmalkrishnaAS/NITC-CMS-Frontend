@@ -68,7 +68,7 @@ const [comment, setComment] = useState("");
       router.push("/login");
     }
 
-  }, [selectedData,deleteId,AllData]);
+  }, [selectedData,deleteId]);
 
   const options1 = [
     {
@@ -193,7 +193,22 @@ const [comment, setComment] = useState("");
       remarks:remarks
     }
   )
-   setSelectedData(null)
+
+  //update ALLDATA
+  setAllData(
+    AllData.map((item)=>{
+      if(item.id===selectedData.id){
+        return {
+          ...item,
+          status:"Resolved",
+          remarks:remarks
+        }
+      }
+      return item
+    }
+    )
+  )
+
   };
 
   const handleSubmit2 = (e) => {

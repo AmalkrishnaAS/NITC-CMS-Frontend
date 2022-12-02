@@ -12,10 +12,11 @@ const users = ({user}) => {
   const router = useRouter();
 
   useEffect(() => {
-    if(user?.role!=="committee head") {
+    if( user&& user?.role!=="committee head") {
       router.push('/')
 
       toast.warn("You are not authorized to view this page")
+      
     }
     axios.get('http://localhost:5000/pending_reqs',{
       headers:{
@@ -29,7 +30,7 @@ const users = ({user}) => {
     )
   
   
-  }, [users])
+  }, [])
 
     
 

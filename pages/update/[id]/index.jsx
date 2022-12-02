@@ -7,6 +7,7 @@ import {
 } from 'flowbite-react'
 
 import Select from 'react-select'
+import {getOptsbyStatus} from '../../../lib/fns'
 
 
 
@@ -203,7 +204,7 @@ const handleChange=(e)=>{
     </div>}
     
    {user?.role==='committee head'&& <div class="relative z-0 mb-6 w-full group mt-4">
-        <Select placeholder={complaints?.status } options={opts2}
+        <Select placeholder={complaints?.status } options={getOptsbyStatus(complaints?.status)}
         name="status"
         onChange={handleSelect}
         value={

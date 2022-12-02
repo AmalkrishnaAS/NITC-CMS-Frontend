@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }) {
+  const [isUserOpened, setIsUserOpened] = useState(false)
 const router = useRouter();
   
 
@@ -37,19 +38,27 @@ const router = useRouter();
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    setIsUserOpened(false)
     router.push("/login");
+
   };
 
   return (
     <>
     <ToastContainer/>
     
-      <Navbar user={user}  logout={logout} setUser={setUser} />
+      <Navbar user={user}  logout={logout} setUser={setUser}
+      setIsUserOpened={setIsUserOpened}
+      isUserOpened={isUserOpened}
+      />
 
       <div className=" ">
         <Component {...pageProps} user={user} setUser={setUser} logout={
           logout
-        }  />
+        }
+        setIsUserOpened={setIsUserOpened}
+        isUserOpened={isUserOpened}
+        />
 
         {/* <FooterComp/> */}
       </div>

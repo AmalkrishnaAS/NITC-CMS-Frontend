@@ -65,6 +65,10 @@ const CommitteReg = () => {
     if(formData.password!=formData.cpassword){
       toast.error("Password and Confirm Password should be same")
     }
+    else if(!formData.email.endsWith("@nitc.ac.in")){
+      toast.error("Email must end with @nitc.ac.in")
+      return
+    }
     else{
       try{
         const res=await axios.post('http://localhost:5000/signup',{
@@ -77,13 +81,14 @@ const CommitteReg = () => {
         })
         console.log(res.data)
         toast.success("Committee Member Registered Successfully")
+        router.push('/login')
 
       } catch(error){
         console.log(error)
         toast.error("Committee Member Already Registered")
       }
 
-      router.push('/login')
+     
      
       
     }
@@ -99,7 +104,7 @@ const CommitteReg = () => {
   };
   return (
     <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8 mb-8">
-      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Register as a Committee Member </h3>
+      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3 ">Register as a Section Head </h3>
     <form className=""
     onSubmit={
         handleSubmit
