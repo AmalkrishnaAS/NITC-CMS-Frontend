@@ -116,7 +116,7 @@ const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,u
             }
     </span>
     </Badge>
-    <Badge icon={HiLocationMarker}
+    {item.location&&<Badge icon={HiLocationMarker}
        className='text-sm text-blue-800 sm:text-md'
         >
         
@@ -128,7 +128,7 @@ const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,u
                 item?.location
             }
     </span>
-    </Badge>
+    </Badge>}
  
      </div>
         <div className="p-1 mb-2 text-gray-700 dark:text-gray-400 ">

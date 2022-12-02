@@ -158,6 +158,25 @@ const handleChange=(e)=>{
  
 />
 </div>}
+  {user?.role==='User'&&<div>
+<div className="mb-2 block">
+  <Label
+    htmlFor="email3"
+    value="location"
+  />
+</div>
+<TextInput
+  id="location"
+  type="Text"
+  placeholder="location"
+  name="location"
+  value={complaints?.location}
+  onChange={handleChange}
+
+  disabled={user?.role==='admin'}
+ 
+/>
+</div>}
  
   
   

@@ -50,7 +50,7 @@ const DeleteModal = ({
             color="gray"
             onClick={
                 () => {
-                    setDeleteModal(false)
+                    setDeleteId(null)
                 }
             }
           >

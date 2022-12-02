@@ -15,9 +15,9 @@ const register = ({user}) => {
   const router=useRouter()
 
   useEffect(() => {
-    if(user) 
+    if(localStorage.getItem('token')) 
     {
-      router.replace('/')
+      router.push('/')
     }
     
   }, [])

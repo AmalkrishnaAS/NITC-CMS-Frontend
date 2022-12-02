@@ -24,20 +24,21 @@ const UserReg = () => {
     id: '',
     name:''
   })
-  const handleSubmit = (e) => {
+  const handleSubmit = async  (e) => {
     e.preventDefault()  
     if(formData.password!=formData.cpassword){
     toast.error("Passwords do not match")
+    return
     }
 
-    //check if the email ends with @nitc.ac.in
+    // check if the email ends with @nitc.ac.in
     if(!formData.email.endsWith("@nitc.ac.in")){
       toast.error("Email must end with @nitc.ac.in")
       return
     }
     else{
       try{
-        const res=axios.post('http://localhost:5000/signup',{
+        const res=await axios.post('http://localhost:5000/signup',{
           email:formData.email,
           password:formData.password,
           department:formData.department,
@@ -45,15 +46,19 @@ const UserReg = () => {
           role:"user",
           name:formData.name
         })
-        console.log(res.data)
         toast.success("User Registered Successfully")
+
+        console.log(res.data)
+        router.push('/login')
+       
       } catch(error){
+
         console.log(error)
         toast.error("User Already Registered")
       }
     }
     console.log(formData)
-    router.push('/login')
+  
     
   }
   const handleChange = (e) => {

@@ -64,13 +64,19 @@ const CommitteReg = () => {
     console.log(formData.role)
     if(formData.password!=formData.cpassword){
       toast.error("Password and Confirm Password should be same")
+      return
     }
     else if(!formData.email.endsWith("@nitc.ac.in")){
       toast.error("Email must end with @nitc.ac.in")
       return
     }
+    else if(formData?.type==""){
+      toast.error("Please select a type")
+      return
+    }
     else{
       try{
+
         const res=await axios.post('http://localhost:5000/signup',{
           name:formData.name,
           email:formData.email,
@@ -80,12 +86,12 @@ const CommitteReg = () => {
           type:formData.type
         })
         console.log(res.data)
-        toast.success("Committee Member Registered Successfully")
+        toast.success("Section head Registered Successfully")
         router.push('/login')
 
       } catch(error){
         console.log(error)
-        toast.error("Committee Member Already Registered")
+        toast.error("Section head Already Registered")
       }
 
      
@@ -94,13 +100,7 @@ const CommitteReg = () => {
     }
     console.log(formData);
     //clear form
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-      designation: "",
-    });
+    
   };
   return (
     <div className=" px-4  md:w-[60vw] mx-auto  py-2   sm:px-6 lg:px-8 mb-8">
@@ -227,8 +227,10 @@ const CommitteReg = () => {
       options={opts}
       onChange={handleSelect}
       name="type"
-      placeholder="Select Type"
+      placeholder={formData.type==""?"Select Type":formData.type}
       className="mt-3"
+      required={true}
+      value={formData.type}
       ></Select>
       
       

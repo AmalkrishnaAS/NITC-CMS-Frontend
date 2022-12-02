@@ -13,7 +13,7 @@ const login = ({setUser,user}) => {
     const[formData,setFormData]=useState({
         email:'',
         password:'',
-        role:'section head'
+        role:'user'
     })
 
     const handleChange = (e) => {
@@ -25,19 +25,20 @@ const login = ({setUser,user}) => {
     }
 
     const router = useRouter()
-    // useEffect(() => {
-    //     document.body.classList.add('overflow-hidden')
-    //     //when component unmounts
-    //     return () => {
-    //         document.body.classList.remove('overflow-hidden')
-    //     }
-
+    useEffect(() => {
+       if(localStorage.getItem('token')){
+           router.push('/')
+       }
         
 
-    // }, [])
+    }, [])
 
     const login = async (e) => {
         e.preventDefault()
+        if(!formData.email.endsWith("@nitc.ac.in")){
+            toast.error("Email must end with @nitc.ac.in")
+            return
+          }
 
 
       try {
@@ -63,6 +64,8 @@ localStorage.setItem('user',JSON.stringify(res1.data))
 
 //set avatar
 setUser((user)=>{
+
+
     return{
         ...user,
         avatar:getAvatar(res1.data.email)

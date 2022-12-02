@@ -48,6 +48,10 @@ const create = ({user}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if(formData.type==="") {
+          toast.error("Please select a type")
+          return;
+        }
         console.log(localStorage.getItem('token'))
         const res=await axios.post('http://localhost:5000/complaint',{
           title:formData.title,
@@ -175,7 +179,6 @@ const create = ({user}) => {
     type="text"
     value={user?.location}
     placeholder="Mini Canteen"
-    required={true}
     name="location"
     onChange={handleChange}
    
@@ -205,6 +208,7 @@ const create = ({user}) => {
           <Select placeholder='Type' options={opts}
           onChange={handleSelect}
           name="type"
+          required={true}
         
 
           

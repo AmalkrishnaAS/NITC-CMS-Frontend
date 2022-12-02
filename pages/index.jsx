@@ -11,7 +11,7 @@ import DeleteModal from "../components/DeleteModal";
 import CommentModal from "../components/CommentModal";
 import {toast} from 'react-toastify'
 
-const Home = ({ user}) => {
+const Home = ({ user,logout}) => {
 
   const [localComments,setLocalComments]=useState([])
 
@@ -336,7 +336,7 @@ const [comment, setComment] = useState("");
       You are not authorized. Contact Commitee head for more info 
       <Button
       onClick={
-        ()=>router.push('/login')
+        logout
       }
       >
         Go Back
