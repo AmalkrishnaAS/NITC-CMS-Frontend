@@ -168,7 +168,7 @@ const create = ({user}) => {
    
   />
 </div>
-    <div>
+    {/* <div>
   <div className="mb-2 block">
     <Label
       htmlFor="email3"
@@ -184,7 +184,7 @@ const create = ({user}) => {
     onChange={handleChange}
    
   />
-</div>
+</div> */}
     <div id="textarea">
   <div className="mb-2 block">
     <Label
