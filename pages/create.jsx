@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 const create = ({user}) => {
   const router = useRouter();
   useEffect(() => {
+    console.log(user);
 
     if(user?.role!=="User") {
       router.push('/')
