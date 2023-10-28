@@ -60,7 +60,10 @@ const [comment, setComment] = useState("");
         setAllData(res.data.Complaints);
         setData(res.data.Complaints);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data.Response)
+      });
 
 
      const token = localStorage.getItem("token");

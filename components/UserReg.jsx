@@ -54,7 +54,7 @@ const UserReg = () => {
       } catch(error){
 
         console.log(error)
-        toast.error("User Already Registered")
+        toast.error(error.response.data.Response)
       }
     }
     console.log(formData)

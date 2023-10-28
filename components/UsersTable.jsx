@@ -19,7 +19,9 @@ setUsers
   }, [users])
   const authorizeUser = async (id) => {
     // const router = useRouter()
-   const url='http://localhost:5000/authorize/'+id
+    
+    try {
+      const url='http://localhost:5000/authorize/'+id
    const  res=await axios.get('http://localhost:5000/authorize/'+id,{
     headers:{
       'x-access-token':localStorage.getItem('token')
@@ -28,6 +30,13 @@ setUsers
     console.log(res)
     setUsers(users.filter(user=>user.id!==id))
     toast.success('User Authorized')
+      
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.Response) 
+      
+    }
+   
     
   
    
@@ -48,7 +57,7 @@ setUsers
       setUsers(users.filter(user=>user?.id!==id))
     } catch (error) {
       console.log(error)
-      toast.error("User Deletion Failed")
+      toast.error(error.response.data.Response)
     }
   }
   

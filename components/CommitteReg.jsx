@@ -91,7 +91,7 @@ const CommitteReg = () => {
 
       } catch(error){
         console.log(error)
-        toast.error("Section head Already Registered")
+        toast.error(error.response.data.Response)
       }
 
      

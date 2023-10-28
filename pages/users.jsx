@@ -12,22 +12,31 @@ const users = ({user}) => {
   const router = useRouter();
 
   useEffect(() => {
-    if( user&& user?.role!=="committee head") {
-      router.push('/')
 
-      toast.warn("You are not authorized to view this page")
+    try {
+      if( user&& user?.role!=="committee head") {
+        router.push('/')
+  
+        toast.warn("You are not authorized to view this page")
+        
+      }
+      axios.get('http://localhost:5000/pending_reqs',{
+        headers:{
+          'x-access-token':localStorage.getItem('token')
+        }
+    })
+      .then(res => {
+        console.log(res.data)
+        setUsers(res.data)
+      }
+      )
+      
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.Response)
       
     }
-    axios.get('http://localhost:5000/pending_reqs',{
-      headers:{
-        'x-access-token':localStorage.getItem('token')
-      }
-  })
-    .then(res => {
-      console.log(res.data)
-      setUsers(res.data)
-    }
-    )
+    
   
   
   }, [])
