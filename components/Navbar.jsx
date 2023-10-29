@@ -65,9 +65,13 @@ const Navbar = ({user,login,logout,isUserOpened,setIsUserOpened}) => {
             user?.avatar
         } alt="user photo z-100" />
       </button>
-    :<Button onClick={
+    :router.pathname!=='/login'?(<Button onClick={
         ()=>router.push('/login')
-    } className='bg-700'>Login</Button>
+    } className='bg-700'>Login</Button>):
+    (<Button onClick={
+        ()=>router.push('/register')
+    } className='bg-700'>Register</Button>)
+
       }
       
       <div class={` ${
@@ -113,8 +117,11 @@ const Navbar = ({user,login,logout,isUserOpened,setIsUserOpened}) => {
   justify-between items-center w-full md:flex md:w-auto md:order-1 bg-white z-100`} id="mobile-menu-2">
     <ul class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       
-        {
+        {user?.role==='User'&&
             routes.map((route, index) => {
+                if(user && route.name==="Register") {
+                    return null
+                }
                 return(
                     <li key={index}  onClick={route.function} >
                         <p  class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">

@@ -6,14 +6,16 @@ const TabGroup = () => {
   return (
     <div className='h-1/2  mx-auto'>
       <Tabs.Group className="" aria-label="Tabs with underline" style="underline"
-      
+      active={true}
       > 
        
-        <Tabs.Item title="User">
+        <Tabs.Item title="User"
+        
+        >
             <UserReg />
         </Tabs.Item>
         
-        <Tabs.Item active={true} title="Section Head">
+        <Tabs.Item  title="Section Head">
        <CommitteReg></CommitteReg>
         </Tabs.Item>
         {/* <Tabs.Item title="Settings">Settings content</Tabs.Item>
