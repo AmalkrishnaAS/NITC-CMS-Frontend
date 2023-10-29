@@ -134,7 +134,7 @@ const CommentModal = ({ selectedData,setSelectedData, user,comments,getAvatar,it
         placeholder="Remarks"
         value={selectedData?.remarks}
         disabled={true}
-      />
+              />
     </div>
     </div>
     }

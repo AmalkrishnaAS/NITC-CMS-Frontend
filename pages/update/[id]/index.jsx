@@ -158,7 +158,7 @@ const handleChange=(e)=>{
  
 />
 </div>}
-  {/* {user?.role==='User'&&<div>
+  {user?.role==='User'&&<div>
 <div className="mb-2 block">
   <Label
     htmlFor="email3"
@@ -177,7 +177,7 @@ const handleChange=(e)=>{
  
 />
 </div>}
-  */}
+ 
   
   
   {user?.role==='User'&&<div id="textarea">
@@ -242,6 +242,9 @@ const handleChange=(e)=>{
  >
     Update
  </Button>:
+ <div
+ className='flex justify-center items-center flex-col bg-gray-200 h-64 rounded-xl shadow-md border-2 border-blue-500 mt-6'
+ >
 <div
 className='flex justify-center items-center flex-col '
 >
@@ -258,6 +261,8 @@ className='flex justify-center items-center flex-col '
       </Button>
 
 </div> 
+ </div>
+
  }
 </form>
 </div>

@@ -68,7 +68,7 @@ const [comment, setComment] = useState("");
       router.push("/login");
     }
 
-  }, [selectedData,deleteId, compalaints]);
+  }, [selectedData,deleteId]);
 
   const options1 = [
     {
@@ -332,16 +332,18 @@ const [comment, setComment] = useState("");
         
       ></Accordion>
     </div>:
-    <div className="flex text-xl justify-center items-center flex-col space-y-3 h-screen">
-      You are not authorized. Contact Commitee head for more info 
-      <Button
-      onClick={
-        logout
-      }
-      >
-        Go Back
-      </Button>
+    <div
+    className="w-screen h-screen flex justify-center "
+    >
+  <div className="flex justify-center items-center flex-col bg-gray-200 h-64 rounded-xl shadow-md border-2 border-blue-500 mt-6 mx-12 w-1/2">
+    <div className="flex justify-center items-center flex-col ">
+      <h1 className="text-lg my-3">You are not authorized to view complaints</h1>
+      <Button onClick={logout}>Logout</Button>
     </div>
+  </div>
+    </div>
+  
+    
     }
     </>
   );

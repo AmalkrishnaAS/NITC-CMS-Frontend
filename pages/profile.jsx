@@ -29,13 +29,16 @@ const profile = ({user,logout
   return (
 
     
-    <div className="w-sceen flex flex-col space-y-3 items-center mt-6 py-3">
-    <img
-        className="w-40 h-40 rounded-full"
+    <div className="w-sceen flex flex-col  space-y-3 items-center mt-6 py-3  ">
+      <div
+      
+      className='border-2 border-blue-500 px-16 pb-5 rounded-xl'>
+      <img
+        className=" rounded-full"
         src={user?.avatar}
         alt="Jese image"
         />
-        <div className="mb-9">
+        <div className="mb-5">
       <Label className="mb-2">Name</Label>
       <TextInput
         className="w-full"
@@ -44,7 +47,7 @@ const profile = ({user,logout
         disabled={true}
       />
     </div>
-        <div className="">
+        <div className="mb-5">
       <Label className="mb-2">Email</Label>
       <TextInput
         className="w-full"
@@ -53,7 +56,7 @@ const profile = ({user,logout
         disabled={true}
       />
     </div>
-        <div className="mb-9">
+        <div className="mb-5">
       <Label className="mb-2">Type</Label>
       <TextInput
         className="w-full"
@@ -63,7 +66,7 @@ const profile = ({user,logout
       />
      
     </div>
-        <div className="mb-9">
+        <div className="mb-5">
       <Label className="mb-2">Role</Label>
       <TextInput
         className="w-full"
@@ -84,6 +87,7 @@ const profile = ({user,logout
      
     </div>
         <Button
+        className='w-full'
         onClick={
             logout
         }
@@ -100,6 +104,8 @@ const profile = ({user,logout
     
     
     </div>
+      </div>
+    
   )
 }
 
