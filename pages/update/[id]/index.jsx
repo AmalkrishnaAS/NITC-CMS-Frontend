@@ -94,7 +94,7 @@ const handleChange=(e)=>{
           'x-access-token':localStorage.getItem('token')
         }})
         console.log(res)
-        router.push('/')
+        await router.push('/')
         return;
         
       }

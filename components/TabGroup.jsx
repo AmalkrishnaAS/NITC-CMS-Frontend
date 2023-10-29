@@ -13,7 +13,7 @@ const TabGroup = () => {
             <UserReg />
         </Tabs.Item>
         
-        <Tabs.Item active={true} title="Committee">
+        <Tabs.Item active={true} title="Section Head">
        <CommitteReg></CommitteReg>
         </Tabs.Item>
         {/* <Tabs.Item title="Settings">Settings content</Tabs.Item>

@@ -68,7 +68,7 @@ const [comment, setComment] = useState("");
       router.push("/login");
     }
 
-  }, [selectedData,deleteId]);
+  }, [selectedData,deleteId, compalaints]);
 
   const options1 = [
     {
