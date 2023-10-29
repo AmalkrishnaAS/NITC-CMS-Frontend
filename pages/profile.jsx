@@ -34,11 +34,11 @@ const profile = ({user,logout
       
       className='border-2 border-blue-500 px-16 pb-5 rounded-xl'>
       <img
-        className=" rounded-full"
+        className=" rounded-full mt-5"
         src={user?.avatar}
         alt="Jese image"
         />
-        <div className="mb-5">
+        <div className="mb-3">
       <Label className="mb-2">Name</Label>
       <TextInput
         className="w-full"
@@ -47,7 +47,7 @@ const profile = ({user,logout
         disabled={true}
       />
     </div>
-        <div className="mb-5">
+        <div className="mb-3">
       <Label className="mb-2">Email</Label>
       <TextInput
         className="w-full"
@@ -56,7 +56,7 @@ const profile = ({user,logout
         disabled={true}
       />
     </div>
-        <div className="mb-5">
+        <div className="mb-3">
       <Label className="mb-2">Type</Label>
       <TextInput
         className="w-full"
@@ -66,7 +66,7 @@ const profile = ({user,logout
       />
      
     </div>
-        <div className="mb-5">
+        <div className="mb-3">
       <Label className="mb-2">Role</Label>
       <TextInput
         className="w-full"
@@ -76,7 +76,7 @@ const profile = ({user,logout
       />
      
     </div>
-        <div className="mb-9">
+        <div className="mb-5">
       <Label className="mb-2">Department</Label>
       <TextInput
         className="w-full"
@@ -86,7 +86,15 @@ const profile = ({user,logout
       />
      
     </div>
-        <Button
+      { user?.role==='committee head' && <Button
+        className='w-full'
+        onClick={
+            ()=>router.push('/users')
+        }
+        >
+            Manage Users
+        </Button>}
+        <Button style={{marginTop:'10px'}}
         className='w-full'
         onClick={
             logout
@@ -94,14 +102,6 @@ const profile = ({user,logout
         >
             Logout
         </Button>
-      { user?.role==='committee head' && <Button
-        onClick={
-            ()=>router.push('/users')
-        }
-        >
-            Manage Users
-        </Button>}
-    
     
     </div>
       </div>
