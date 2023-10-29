@@ -158,7 +158,7 @@ const handleChange=(e)=>{
  
 />
 </div>}
-  {user?.role==='User'&&<div>
+  {/* {user?.role==='User'&&<div>
 <div className="mb-2 block">
   <Label
     htmlFor="email3"
@@ -177,7 +177,7 @@ const handleChange=(e)=>{
  
 />
 </div>}
- 
+  */}
   
   
   {user?.role==='User'&&<div id="textarea">
