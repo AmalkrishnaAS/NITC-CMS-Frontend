@@ -54,7 +54,7 @@ const index = ({user}) => {
     useEffect(() => {
         const {id} = router.query
            console.log(id)
-           axios.get(`http://localhost:5000/complaint/${id}`,{
+           axios.get(`${process.env.NEXT_PUBLIC_SERVER}/complaint/${id}`,{
             headers:{
               'x-access-token':localStorage.getItem('token')
            },
@@ -87,7 +87,7 @@ const handleChange=(e)=>{
 
       if(user.role==='committee head') {
         console.log(complaints.id)
-        const res=await axios.put(`http://localhost:5000/changeStatus/${complaints?.id}`,{
+        const res=await axios.put(`${process.env.NEXT_PUBLIC_SERVER}/changeStatus/${complaints?.id}`,{
             status:complaints.status,
         },
         {headers:{
@@ -98,7 +98,7 @@ const handleChange=(e)=>{
         return;
         
       }
-      const res=axios.put(`http://localhost:5000/complaint/${complaints.id}`,{
+      const res=axios.put(`${process.env.NEXT_PUBLIC_SERVER}/complaint/${complaints.id}`,{
         title:complaints.title,
         description:complaints.description,
         type:complaints.type,

@@ -23,7 +23,7 @@ const AccordionComp = ({data,setDeleteId,deleteId,selectedData,setSelectedData,u
     const deleteComplaint=async (id)=>{
         console.log(id)
         console.log(`complaint ${id} `)
-      const  res=await axios.delete(`http://localhost:5000/complaint/${id}`,
+      const  res=await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/complaint/${id}`,
         {
             headers:{
                 'x-access-token':localStorage.getItem('token')

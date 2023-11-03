@@ -20,7 +20,7 @@ setUsers
   const authorizeUser = async (id) => {
     // const router = useRouter()
    const url='http://localhost:5000/authorize/'+id
-   const  res=await axios.get('http://localhost:5000/authorize/'+id,{
+   const  res=await axios.get(`${NEXT_PUBLIC_SERVER}`+id,{
     headers:{
       'x-access-token':localStorage.getItem('token')
     }
@@ -37,7 +37,7 @@ setUsers
 
   const deleteUser = async (id) => {
     try {
-      const res = await axios.delete('http://localhost:5000/rmUser/'+id, {
+      const res = await axios.delete(`${NEXT_PUBLIC_SERVER}/rmUser/`+id, {
         headers: {
           'x-access-token': localStorage.getItem('token')
         }

@@ -54,7 +54,7 @@ const create = ({user}) => {
           return;
         }
         console.log(localStorage.getItem('token'))
-        const res=await axios.post('http://localhost:5000/complaint',{
+        const res=await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/complaint`,{
           title:formData.title,
           description:formData.description,
           type:formData.type,

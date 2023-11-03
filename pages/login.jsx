@@ -42,7 +42,7 @@ const login = ({setUser,user}) => {
 
 
       try {
-        const res = await axios.post('http://localhost:5000/login', {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/login`, {
             email: formData.email,
             password: formData.password,
             role:formData.role
@@ -53,7 +53,7 @@ const login = ({setUser,user}) => {
        await localStorage.setItem('token', res.data.token)
        console.log(localStorage.getItem('token'))
 
-       const res1 = await axios.get('http://localhost:5000/user/current', {
+       const res1 = await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/user/current`, {
         headers: {
             'x-access-token': localStorage.getItem('token')
         }

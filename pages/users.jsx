@@ -18,7 +18,7 @@ const users = ({user}) => {
       toast.warn("You are not authorized to view this page")
       
     }
-    axios.get('http://localhost:5000/pending_reqs',{
+    axios.get(`${process.env.NEXT_PUBLIC_SERVER}/pending_reqs`,{
       headers:{
         'x-access-token':localStorage.getItem('token')
       }

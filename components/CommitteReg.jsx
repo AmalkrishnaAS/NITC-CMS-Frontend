@@ -77,7 +77,7 @@ const CommitteReg = () => {
     else{
       try{
 
-        const res=await axios.post('http://localhost:5000/signup',{
+        const res=await axios.post(`${process.env.NEXT_PUBLIC_SERVER}/signup`,{
           name:formData.name,
           email:formData.email,
           password:formData.password,

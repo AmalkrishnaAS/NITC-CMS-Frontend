@@ -29,7 +29,7 @@ const Home = ({ user,logout}) => {
 
   const deleteComplaint=async ()=>{
     console.log(`complaint ${deleteId} `)
-  const  res=await axios.delete(`http://localhost:5000/complaint/${deleteId}`,
+  const  res=await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/complaint/${deleteId}`,
     {
         headers:{
             'x-access-token':localStorage.getItem('token')
@@ -176,7 +176,7 @@ const [comment, setComment] = useState("");
       setRemarks("")
       return;
     }
-    const res=axios.post('http://localhost:5000/resolve/'+selectedData.id,{
+    const res=axios.post(`${process.env.NEXT_PUBLIC_SERVER}/resolve/`+selectedData.id,{
       remarks:remarks,
   },{
       headers:{
@@ -225,7 +225,7 @@ const [comment, setComment] = useState("");
   setSelectedData(null)
 
     console.log("form submitted");
-    const res=axios.post('http://localhost:5000/comment/'+selectedData.id,{
+    const res=axios.post(`${process.env.NEXT_PUBLIC_SERVER}/comment/`+selectedData.id,{
       comment:comment,
   },{
       headers:{
