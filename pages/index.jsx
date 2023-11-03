@@ -50,7 +50,7 @@ const [comment, setComment] = useState("");
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/complaints",{
+      .get(`${process.env.NEXT_PUBLIC_SERVER}/complaints`,{
         headers:{
           'x-access-token':localStorage.getItem('token')
         }
