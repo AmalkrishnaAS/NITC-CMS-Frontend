@@ -29,7 +29,7 @@ const Home = ({ user,logout}) => {
 
   const deleteComplaint=async ()=>{
     console.log(`complaint ${deleteId} `)
-  const  res=await axios.delete(`${process.env.NEXT_PUBLIC_SERVER}/complaint/${deleteId}`,
+  const  res=await axios.get(`${process.env.NEXT_PUBLIC_SERVER}/complaintd/${deleteId}`,
     {
         headers:{
             'x-access-token':localStorage.getItem('token')
